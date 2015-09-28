@@ -321,7 +321,7 @@ void fire_frame2(size_t frameNum) {
       set_image_and_center_bottom(weapon, &prezr_sg_fire3.resources[0], weaponPos);
       break;
     case 2:      
-      prezr_unload_sg_fire2();
+      prezr_unload_sg_fire3();
       prezr_load_sg_static();
       set_image_and_center_bottom(weapon, &prezr_sg_static.resources[PREZR_SG_STATIC_SHTGA0], weaponPos);
       return; // end of animation

@@ -10,6 +10,11 @@ int prezr_init(prezr_pack_t* pack, uint32_t rid) {
     ResHandle h = resource_get_handle(rid);
     uint8_t* blob = NULL;
     prezr_pack_header_t* pack_header = NULL;
+  
+    if (pack->header != NULL) {
+      APP_LOG(APP_LOG_LEVEL_DEBUG, "[PREZR] overwriting a valid pack -- leak?");
+      return PREZR_EXISTING_DATA;
+    }
 
     memset(pack, 0, sizeof(*pack));
 
