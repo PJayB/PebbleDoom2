@@ -4,6 +4,7 @@
 void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   if ((units_changed & MINUTE_UNIT) != 0) {
     doom_time_changed(tick_time);
+    doom_play_kill_animation();
   } else if ((units_changed & SECOND_UNIT) != 0) {
     doom_animate();
   }
