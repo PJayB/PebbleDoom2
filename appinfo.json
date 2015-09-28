@@ -1,0 +1,114 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "GeekyPanda",
+    "longName": "PEBBLE DOOM 2",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/STFKILL1.png",
+                "menuIcon": true,
+                "name": "LOGO",
+                "type": "png"
+            },
+            {
+                "file": "data/prezr.weaponfire3.blob",
+                "name": "PREZR_WEAPONFIRE3_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.weaponfire2.blob",
+                "name": "PREZR_WEAPONFIRE2_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.weaponfire1.blob",
+                "name": "PREZR_WEAPONFIRE1_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.playerwalk.blob",
+                "name": "PREZR_PLAYERWALK_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.playerdie.blob",
+                "name": "PREZR_PLAYERDIE_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.weaponstatic.blob",
+                "name": "PREZR_WEAPONSTATIC_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.respawn.blob",
+                "name": "PREZR_RESPAWN_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.lamp_off.blob",
+                "name": "PREZR_LAMP_OFF_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.facebattery.blob",
+                "name": "PREZR_FACEBATTERY_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.face4.blob",
+                "name": "PREZR_FACE4_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.face3.blob",
+                "name": "PREZR_FACE3_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.face2.blob",
+                "name": "PREZR_FACE2_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.face1.blob",
+                "name": "PREZR_FACE1_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.background.blob",
+                "name": "PREZR_BACKGROUND_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.face0.blob",
+                "name": "PREZR_FACE0_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.lamp_on.blob",
+                "name": "PREZR_LAMP_ON_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.numerals.blob",
+                "name": "PREZR_NUMERALS_PACK",
+                "type": "raw"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "PEBBLEDOOM2",
+    "targetPlatforms": [
+        "basalt"
+    ],
+    "uuid": "5d977290-f06f-4ae8-b864-1ed54601d833",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}

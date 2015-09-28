@@ -1,0 +1,37 @@
+#include <pebble.h>
+#include "doom.h"
+  
+void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
+  doom_time_changed(tick_time);
+}
+  
+void anim_handler(struct tm *tick_time, TimeUnits units_changed) {
+  doom_animate();
+}
+
+void battery_handler(BatteryChargeState state) {
+  doom_battery_level_changed(state.charge_percent, state.is_charging);
+}
+
+void bluetooth_handler(bool state) {
+  doom_bluetooth_changed(state);
+}
+ 
+int main(void) {
+  
+  time_t time_now;
+  time(&time_now);
+  struct tm* localtime_now = localtime(&time_now);
+
+  BatteryChargeState battery = battery_state_service_peek();
+  
+  bool bt = bluetooth_connection_service_peek();
+  
+  doom_init(localtime_now, battery.charge_percent, battery.is_charging, bt);
+  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
+  tick_timer_service_subscribe(SECOND_UNIT, anim_handler);
+  battery_state_service_subscribe(battery_handler);
+  bluetooth_connection_service_subscribe(bluetooth_handler);
+  app_event_loop();
+  doom_destroy();
+}
