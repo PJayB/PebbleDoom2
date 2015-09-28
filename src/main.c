@@ -28,7 +28,7 @@ int main(void) {
   bool bt = bluetooth_connection_service_peek();
   
   doom_init(localtime_now, battery.charge_percent, battery.is_charging, bt);
-  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
+  tick_timer_service_subscribe(SECOND_UNIT, tick_handler);
   battery_state_service_subscribe(battery_handler);
   bluetooth_connection_service_subscribe(bluetooth_handler);
   app_event_loop();
