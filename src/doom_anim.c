@@ -1,5 +1,7 @@
 #include <pebble.h>
+#include "prezr.h"
 #include "packhelpers.h"
+#include "prezrpackages.h"
 #include "doom_res.h"
 #include "doom_anim.h"
 #include "doom_ui.h"
@@ -29,7 +31,7 @@ int walk_frame = 0;
 
 void start_zombie_walk(void) {
     ASSERT(!in_zombie_die);
-    load_placement_pack(&zombie_pack, &zombie_mem, RESOURCE_ID_PREZR_ZOMBIEWALK_PACK);
+    load_zombie_walk_pack();
     set_image_and_center_bottom(layer_player, &zombie_pack.resources[0], zombiePos);
     in_zombie_walk = true;
 }
@@ -48,8 +50,7 @@ void end_zombie_walk_anim(void) {
 
 void start_zombie_die_anim(void) {
     ASSERT(!in_zombie_die);
-
-    load_placement_pack(&zombie_pack, &zombie_mem, RESOURCE_ID_PREZR_ZOMBIEDIE_PACK);
+    load_zombie_die_pack();
     set_image_and_center_bottom(layer_player, &zombie_pack.resources[0], zombiePos);
 }
 
@@ -75,7 +76,7 @@ bool in_weapon_fire = false;
 
 void start_weapon_static_anim(void) {
     ASSERT(!in_weapon_static);
-    load_placement_pack(&weapon_pack, &weapon_mem, RESOURCE_ID_PREZR_SG_STATIC_PACK);
+    load_pack_placement(&weapon_pack, &weapon_mem, RESOURCE_ID_PREZR_SG_STATIC_PACK);
     set_image_and_center_bottom(layer_weapon, &weapon_pack.resources[PREZR_SG_STATIC_SHTGA0], weaponPos);
     in_weapon_static = true;
 }
@@ -119,7 +120,7 @@ void animate_weapon_fire(size_t index) {
     ASSERT(in_weapon_fire);
     uint32_t res = get_weapon_fire_anim_resource(index);
     if (res != 0) {
-        load_placement_pack(&weapon_pack, &weapon_mem, res);
+        load_pack_placement(&weapon_pack, &weapon_mem, res);
         set_image_and_center_bottom(layer_weapon, &weapon_pack.resources[0], weaponPos);
     }
 }
@@ -196,12 +197,12 @@ void animate_face(uint8_t health, bool charging) {
         int index = (health >= 70)
             ? PREZR_FACEBATTERY_STFGOD0
             : (70 - health) * 4 / 70;
-        bitmap_layer_set_bitmap(layer_face, face_pack.resources[index].bitmap);
+        bitmap_layer_set_bitmap(layer_face, get_face_resource(index));
     }
     else {
         ASSERT(!in_charging);
         uint32_t face_index = rand() % face_pack.numResources;
-        bitmap_layer_set_bitmap(layer_face, face_pack.resources[face_index].bitmap);
+        bitmap_layer_set_bitmap(layer_face, get_face_resource(face_index));
     }
 }
 

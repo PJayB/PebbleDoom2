@@ -83,13 +83,13 @@ void init_dynamic_resources(void) {
 
 void destroy_dynamic_resources(void) {
     // Infrequently changing packs
-    prezr_placement_destroy(&lamp_pack);
-    prezr_placement_destroy(&face_pack);
+    unload_pack_placement(&lamp_pack);
+    unload_pack_placement(&face_pack);
 
     // Frequently changing
-    prezr_placement_destroy(&respawn_pack);
-    prezr_placement_destroy(&weapon_pack);
-    prezr_placement_destroy(&zombie_pack);
+    unload_pack_placement(&respawn_pack);
+    unload_pack_placement(&weapon_pack);
+    unload_pack_placement(&zombie_pack);
 
     // Placement buffers
     destroy_shared_placement_block(&weapon_mem);
@@ -116,10 +116,20 @@ void unload_resources(void) {
 // Respawn pack
 //
 void load_respawn_pack(void) {
-    load_placement_pack_offset(&respawn_pack, &zombie_mem, respawn_mem_offset, RESOURCE_ID_PREZR_RESPAWN_PACK);
+    load_pack_placement_offset(&respawn_pack, &zombie_mem, respawn_mem_offset, RESOURCE_ID_PREZR_RESPAWN_PACK);
 }
 void unload_respawn_pack(void) {
-    unload_placement_pack(&respawn_pack);
+    unload_pack_placement(&respawn_pack);
+}
+
+//
+// Zombie pack
+//
+void load_zombie_walk_pack(void) {
+    load_pack_placement(&zombie_pack, &zombie_mem, RESOURCE_ID_PREZR_ZOMBIEWALK_PACK);
+}
+void load_zombie_die_pack(void) {
+    load_pack_placement(&zombie_pack, &zombie_mem, RESOURCE_ID_PREZR_ZOMBIEDIE_PACK);
 }
 
 //
@@ -135,10 +145,20 @@ static const uint32_t face_type_map[] = {
 };
 
 void change_face_pack(face_type_t type) {
-    load_placement_pack(&face_pack, &face_mem, face_type_map[type]);
+    load_pack_placement(&face_pack, &face_mem, face_type_map[type]);
 }
 
 void change_bluetooth_pack(bool on) {
     uint32_t res = on ? RESOURCE_ID_PREZR_LAMP_ON_PACK : RESOURCE_ID_PREZR_LAMP_OFF_PACK;
-    load_placement_pack(&lamp_pack, &lamp_mem, res);
+    load_pack_placement(&lamp_pack, &lamp_mem, res);
 }
+
+// 
+// Access resources 
+//
+const GBitmap* get_background_resource(void) { return background_pack.resources[PREZR_BACKGROUND_BACKGROUND].bitmap; }
+const GBitmap* get_statusbar_resource(void) { return background_pack.resources[PREZR_BACKGROUND_STATUSBAR].bitmap; }
+const GBitmap* get_lamp_resource(void) { return lamp_pack.resources[0].bitmap; }
+const GBitmap* get_face_resource(uint32_t id) { return face_pack.resources[id].bitmap; }
+const GBitmap* get_numeral_resource(uint32_t id) { return numeric_pack.resources[id].bitmap; }
+

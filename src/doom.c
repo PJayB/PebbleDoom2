@@ -63,16 +63,16 @@ void set_time_display(struct tm* t) {
     if (is_24h || hour > 9) {
         // two numbers here
         layer_set_hidden(bitmap_layer_get_layer(num0), false);
-        bitmap_layer_set_bitmap(num0, prezr_numerals.resources[hour / 10].bitmap);
+        bitmap_layer_set_bitmap(num0, get_numeral_resource(hour / 10));
     }
     else {
         // single digit
         layer_set_hidden(bitmap_layer_get_layer(num0), true);
     }
 
-    bitmap_layer_set_bitmap(num1, prezr_numerals.resources[hour % 10].bitmap);
-    bitmap_layer_set_bitmap(num2, prezr_numerals.resources[t->tm_min / 10].bitmap);
-    bitmap_layer_set_bitmap(num3, prezr_numerals.resources[t->tm_min % 10].bitmap);
+    bitmap_layer_set_bitmap(num1, get_numeral_resource(hour % 10]));
+    bitmap_layer_set_bitmap(num2, get_numeral_resource(t->tm_min / 10]));
+    bitmap_layer_set_bitmap(num3, get_numeral_resource(t->tm_min % 10]));
 }
 
 void set_battery_status(uint8_t percent, bool charging) {
