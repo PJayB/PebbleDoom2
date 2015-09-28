@@ -349,16 +349,23 @@ void fire_frame(void* unused) {
 }
 
 void doom_time_changed(struct tm *t) {
-  if (clock_is_24h_style() || t->tm_hour > 9) {
+  bool is_24h = clock_is_24h_style();
+  int hour = t->tm_hour;
+  
+  if (!is_24h && hour > 12) {
+    hour -= 12;
+  }
+  
+  if (is_24h || hour > 9) {
     // two numbers here
     layer_set_hidden(bitmap_layer_get_layer(num0), false);
-    bitmap_layer_set_bitmap(num0, prezr_numerals.resources[t->tm_hour / 10].bitmap);
+    bitmap_layer_set_bitmap(num0, prezr_numerals.resources[hour / 10].bitmap);
   } else {
     // single digit
     layer_set_hidden(bitmap_layer_get_layer(num0), true);
   }
   
-  bitmap_layer_set_bitmap(num1, prezr_numerals.resources[t->tm_hour % 10].bitmap);
+  bitmap_layer_set_bitmap(num1, prezr_numerals.resources[hour % 10].bitmap);
   bitmap_layer_set_bitmap(num2, prezr_numerals.resources[t->tm_min / 10].bitmap);
   bitmap_layer_set_bitmap(num3, prezr_numerals.resources[t->tm_min % 10].bitmap);
   
