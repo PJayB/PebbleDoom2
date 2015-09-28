@@ -795,34 +795,34 @@ extern void prezr_load_zombiewalk();
 extern void prezr_unload_zombiewalk();
 #endif // PREZR_IMPORT
 
-// ------------------------- zomebiedie -------------------------
-#define PREZR_ZOMEBIEDIE_CHECKSUM 0xB71441D7
+// ------------------------- zombiedie -------------------------
+#define PREZR_ZOMBIEDIE_CHECKSUM 0xB71441D7
 
-typedef enum prezr_pack_zomebiedie_e {
-    PREZR_ZOMEBIEDIE_SPOSG1, // 31x55 Bit8
-    PREZR_ZOMEBIEDIE_SPOSH0, // 33x60 Bit8
-    PREZR_ZOMEBIEDIE_SPOSI0, // 35x50 Bit8
-    PREZR_ZOMEBIEDIE_SPOSJ0, // 42x35 Bit8
-    PREZR_ZOMEBIEDIE_SPOSK0, // 48x27 Bit8
-    PREZR_ZOMEBIEDIE_SPOSL0, // 52x17 Bit8
-    PREZR_ZOMEBIEDIE_COUNT
-} prezr_pack_zomebiedie_t;
+typedef enum prezr_pack_zombiedie_e {
+    PREZR_ZOMBIEDIE_SPOSG1, // 31x55 Bit8
+    PREZR_ZOMBIEDIE_SPOSH0, // 33x60 Bit8
+    PREZR_ZOMBIEDIE_SPOSI0, // 35x50 Bit8
+    PREZR_ZOMBIEDIE_SPOSJ0, // 42x35 Bit8
+    PREZR_ZOMBIEDIE_SPOSK0, // 48x27 Bit8
+    PREZR_ZOMBIEDIE_SPOSL0, // 52x17 Bit8
+    PREZR_ZOMBIEDIE_COUNT
+} prezr_pack_zombiedie_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_ZOMEBIEDIE_PACK)
-prezr_pack_t prezr_zomebiedie;
-void prezr_load_zomebiedie() {
-    int r = prezr_init(&prezr_zomebiedie, RESOURCE_ID_PREZR_ZOMEBIEDIE_PACK);
+#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_ZOMBIEDIE_PACK)
+prezr_pack_t prezr_zombiedie;
+void prezr_load_zombiedie() {
+    int r = prezr_init(&prezr_zombiedie, RESOURCE_ID_PREZR_ZOMBIEDIE_PACK);
     if (r != PREZR_OK)
-        APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'zomebiedie' failed with code %d", r);
-    if (prezr_zomebiedie.numResources != PREZR_ZOMEBIEDIE_COUNT)
-        APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'zomebiedie' resource count mismatch");
+        APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'zombiedie' failed with code %d", r);
+    if (prezr_zombiedie.numResources != PREZR_ZOMBIEDIE_COUNT)
+        APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'zombiedie' resource count mismatch");
 }
-void prezr_unload_zomebiedie() {
-    prezr_destroy(&prezr_zomebiedie);
+void prezr_unload_zombiedie() {
+    prezr_destroy(&prezr_zombiedie);
 }
 #else
-extern prezr_pack_t prezr_zomebiedie;
-extern void prezr_load_zomebiedie();
-extern void prezr_unload_zomebiedie();
+extern prezr_pack_t prezr_zombiedie;
+extern void prezr_load_zombiedie();
+extern void prezr_unload_zombiedie();
 #endif // PREZR_IMPORT
 
