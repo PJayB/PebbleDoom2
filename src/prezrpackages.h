@@ -1,7 +1,7 @@
 #pragma once
 
 // ------------------------- background -------------------------
-#define PREZR_BACKGROUND_CHECKSUM 0xB6FC6867
+#define PREZR_BACKGROUND_CHECKSUM 0x1A651A82
 
 typedef enum prezr_pack_background_e {
     PREZR_BACKGROUND_BACKGROUND, // 144x136 Bit8
@@ -28,7 +28,7 @@ extern void prezr_unload_background();
 #endif // PREZR_IMPORT
 
 // ------------------------- face0 -------------------------
-#define PREZR_FACE0_CHECKSUM 0xB6FD66A9
+#define PREZR_FACE0_CHECKSUM 0x1A65F660
 
 typedef enum prezr_pack_face0_e {
     PREZR_FACE0_STFST00, // 24x29 Bit4Palettized
@@ -56,7 +56,7 @@ extern void prezr_unload_face0();
 #endif // PREZR_IMPORT
 
 // ------------------------- face1 -------------------------
-#define PREZR_FACE1_CHECKSUM 0xB6FDC87A
+#define PREZR_FACE1_CHECKSUM 0x1A666B97
 
 typedef enum prezr_pack_face1_e {
     PREZR_FACE1_STFST10, // 24x29 Bit4Palettized
@@ -84,7 +84,7 @@ extern void prezr_unload_face1();
 #endif // PREZR_IMPORT
 
 // ------------------------- face2 -------------------------
-#define PREZR_FACE2_CHECKSUM 0xB6FE3DD8
+#define PREZR_FACE2_CHECKSUM 0x1A66ED07
 
 typedef enum prezr_pack_face2_e {
     PREZR_FACE2_STFST20, // 24x30 Bit4Palettized
@@ -112,7 +112,7 @@ extern void prezr_unload_face2();
 #endif // PREZR_IMPORT
 
 // ------------------------- face3 -------------------------
-#define PREZR_FACE3_CHECKSUM 0xB6FE9FA9
+#define PREZR_FACE3_CHECKSUM 0x1A674E93
 
 typedef enum prezr_pack_face3_e {
     PREZR_FACE3_STFST30, // 24x31 Bit8
@@ -140,7 +140,7 @@ extern void prezr_unload_face3();
 #endif // PREZR_IMPORT
 
 // ------------------------- face4 -------------------------
-#define PREZR_FACE4_CHECKSUM 0xB6FF0175
+#define PREZR_FACE4_CHECKSUM 0x1A67C3E9
 
 typedef enum prezr_pack_face4_e {
     PREZR_FACE4_STFST40, // 24x31 Bit8
@@ -168,7 +168,7 @@ extern void prezr_unload_face4();
 #endif // PREZR_IMPORT
 
 // ------------------------- facebattery -------------------------
-#define PREZR_FACEBATTERY_CHECKSUM 0xB6FFB18C
+#define PREZR_FACEBATTERY_CHECKSUM 0x1A6873F7
 
 typedef enum prezr_pack_facebattery_e {
     PREZR_FACEBATTERY_STFEVL0, // 24x30 Bit8
@@ -199,7 +199,7 @@ extern void prezr_unload_facebattery();
 #endif // PREZR_IMPORT
 
 // ------------------------- lamp_off -------------------------
-#define PREZR_LAMP_OFF_CHECKSUM 0xB700134E
+#define PREZR_LAMP_OFF_CHECKSUM 0x1A68D5C5
 
 typedef enum prezr_pack_lamp_off_e {
     PREZR_LAMP_OFF_TLP2BG1, // 21x60 Bit4Palettized
@@ -225,7 +225,7 @@ extern void prezr_unload_lamp_off();
 #endif // PREZR_IMPORT
 
 // ------------------------- lamp_on -------------------------
-#define PREZR_LAMP_ON_CHECKSUM 0xB7004DFD
+#define PREZR_LAMP_ON_CHECKSUM 0x1A693799
 
 typedef enum prezr_pack_lamp_on_e {
     PREZR_LAMP_ON_TLP2BG2, // 21x60 Bit8
@@ -251,7 +251,7 @@ extern void prezr_unload_lamp_on();
 #endif // PREZR_IMPORT
 
 // ------------------------- logo -------------------------
-#define PREZR_LOGO_CHECKSUM 0xB70088AF
+#define PREZR_LOGO_CHECKSUM 0x1A69860B
 
 typedef enum prezr_pack_logo_e {
     PREZR_LOGO_STFKILL1, // 28x28 Bit8
@@ -277,7 +277,7 @@ extern void prezr_unload_logo();
 #endif // PREZR_IMPORT
 
 // ------------------------- numerals -------------------------
-#define PREZR_NUMERALS_CHECKSUM 0xB70138BF
+#define PREZR_NUMERALS_CHECKSUM 0x1A6A97B8
 
 typedef enum prezr_pack_numerals_e {
     PREZR_NUMERALS_STTNUM0, // 14x16 Bit4Palettized
@@ -312,7 +312,7 @@ extern void prezr_unload_numerals();
 #endif // PREZR_IMPORT
 
 // ------------------------- playerdie -------------------------
-#define PREZR_PLAYERDIE_CHECKSUM 0xB702BFF6
+#define PREZR_PLAYERDIE_CHECKSUM 0x1A6C5997
 
 typedef enum prezr_pack_playerdie_e {
     PREZR_PLAYERDIE_PLAYG1, // 39x55 Bit8
@@ -345,7 +345,7 @@ extern void prezr_unload_playerdie();
 #endif // PREZR_IMPORT
 
 // ------------------------- playerwalk -------------------------
-#define PREZR_PLAYERWALK_CHECKSUM 0xB7035C79
+#define PREZR_PLAYERWALK_CHECKSUM 0x1A6D1D34
 
 typedef enum prezr_pack_playerwalk_e {
     PREZR_PLAYERWALK_PLAYA1, // 41x56 Bit8
@@ -372,7 +372,7 @@ extern void prezr_unload_playerwalk();
 #endif // PREZR_IMPORT
 
 // ------------------------- respawn -------------------------
-#define PREZR_RESPAWN_CHECKSUM 0xB7046E5C
+#define PREZR_RESPAWN_CHECKSUM 0x1A6EDF28
 
 typedef enum prezr_pack_respawn_e {
     PREZR_RESPAWN_TFOGA0, // 41x56 Bit8
@@ -382,6 +382,9 @@ typedef enum prezr_pack_respawn_e {
     PREZR_RESPAWN_TFOGE0, // 17x16 Bit4Palettized
     PREZR_RESPAWN_TFOGF0, // 9x8 Bit4Palettized
     PREZR_RESPAWN_TFOGG0, // 3x3 Bit2Palettized
+    PREZR_RESPAWN_TFOGH0, // 7x7 Bit4Palettized
+    PREZR_RESPAWN_TFOGI0, // 13x13 Bit4Palettized
+    PREZR_RESPAWN_TFOGJ0, // 17x17 Bit4Palettized
     PREZR_RESPAWN_COUNT
 } prezr_pack_respawn_t;
 
@@ -404,7 +407,7 @@ extern void prezr_unload_respawn();
 #endif // PREZR_IMPORT
 
 // ------------------------- sg_fire1 -------------------------
-#define PREZR_SG_FIRE1_CHECKSUM 0xB705F591
+#define PREZR_SG_FIRE1_CHECKSUM 0x1A7079F9
 
 typedef enum prezr_pack_sg_fire1_e {
     PREZR_SG_FIRE1_SHTGB0, // 119x121 Bit8
@@ -430,7 +433,7 @@ extern void prezr_unload_sg_fire1();
 #endif // PREZR_IMPORT
 
 // ------------------------- sg_fire2 -------------------------
-#define PREZR_SG_FIRE2_CHECKSUM 0xB707693E
+#define PREZR_SG_FIRE2_CHECKSUM 0x1A71ED94
 
 typedef enum prezr_pack_sg_fire2_e {
     PREZR_SG_FIRE2_SHTGC0, // 87x151 Bit8
@@ -456,7 +459,7 @@ extern void prezr_unload_sg_fire2();
 #endif // PREZR_IMPORT
 
 // ------------------------- sg_fire3 -------------------------
-#define PREZR_SG_FIRE3_CHECKSUM 0xB7093EAA
+#define PREZR_SG_FIRE3_CHECKSUM 0x1A73AF9C
 
 typedef enum prezr_pack_sg_fire3_e {
     PREZR_SG_FIRE3_SHTGD0, // 113x131 Bit8
@@ -482,7 +485,7 @@ extern void prezr_unload_sg_fire3();
 #endif // PREZR_IMPORT
 
 // ------------------------- sg_static -------------------------
-#define PREZR_SG_STATIC_CHECKSUM 0xB70A2969
+#define PREZR_SG_STATIC_CHECKSUM 0x1A74867E
 
 typedef enum prezr_pack_sg_static_e {
     PREZR_SG_STATIC_SHTFA0, // 44x31 Bit4Palettized
@@ -509,7 +512,7 @@ extern void prezr_unload_sg_static();
 #endif // PREZR_IMPORT
 
 // ------------------------- ss_fire1 -------------------------
-#define PREZR_SS_FIRE1_CHECKSUM 0xB70A77A8
+#define PREZR_SS_FIRE1_CHECKSUM 0x1A74D4A4
 
 typedef enum prezr_pack_ss_fire1_e {
     PREZR_SS_FIRE1_SHT2I0, // 55x37 Bit8
@@ -535,7 +538,7 @@ extern void prezr_unload_ss_fire1();
 #endif // PREZR_IMPORT
 
 // ------------------------- ss_fire2 -------------------------
-#define PREZR_SS_FIRE2_CHECKSUM 0xB70AED06
+#define PREZR_SS_FIRE2_CHECKSUM 0x1A7549E3
 
 typedef enum prezr_pack_ss_fire2_e {
     PREZR_SS_FIRE2_SHT2J0, // 65x46 Bit8
@@ -561,7 +564,7 @@ extern void prezr_unload_ss_fire2();
 #endif // PREZR_IMPORT
 
 // ------------------------- ss_fire3 -------------------------
-#define PREZR_SS_FIRE3_CHECKSUM 0xB70BEB52
+#define PREZR_SS_FIRE3_CHECKSUM 0x1A763446
 
 typedef enum prezr_pack_ss_fire3_e {
     PREZR_SS_FIRE3_SHT2B0, // 83x103 Bit8
@@ -587,7 +590,7 @@ extern void prezr_unload_ss_fire3();
 #endif // PREZR_IMPORT
 
 // ------------------------- ss_fire4 -------------------------
-#define PREZR_SS_FIRE4_CHECKSUM 0xB70D8619
+#define PREZR_SS_FIRE4_CHECKSUM 0x1A77BB0A
 
 typedef enum prezr_pack_ss_fire4_e {
     PREZR_SS_FIRE4_SHT2C0, // 121x130 Bit8
@@ -613,7 +616,7 @@ extern void prezr_unload_ss_fire4();
 #endif // PREZR_IMPORT
 
 // ------------------------- ss_fire5 -------------------------
-#define PREZR_SS_FIRE5_CHECKSUM 0xB70E49B9
+#define PREZR_SS_FIRE5_CHECKSUM 0x1A787E67
 
 typedef enum prezr_pack_ss_fire5_e {
     PREZR_SS_FIRE5_SHT2D0, // 81x80 Bit8
@@ -639,7 +642,7 @@ extern void prezr_unload_ss_fire5();
 #endif // PREZR_IMPORT
 
 // ------------------------- ss_fire6 -------------------------
-#define PREZR_SS_FIRE6_CHECKSUM 0xB70FD0F1
+#define PREZR_SS_FIRE6_CHECKSUM 0x1A79DE72
 
 typedef enum prezr_pack_ss_fire6_e {
     PREZR_SS_FIRE6_SHT2E0, // 201x63 Bit8
@@ -665,7 +668,7 @@ extern void prezr_unload_ss_fire6();
 #endif // PREZR_IMPORT
 
 // ------------------------- ss_fire7 -------------------------
-#define PREZR_SS_FIRE7_CHECKSUM 0xB7108100
+#define PREZR_SS_FIRE7_CHECKSUM 0x1A7A7A96
 
 typedef enum prezr_pack_ss_fire7_e {
     PREZR_SS_FIRE7_SHT2F0, // 88x51 Bit8
@@ -691,7 +694,7 @@ extern void prezr_unload_ss_fire7();
 #endif // PREZR_IMPORT
 
 // ------------------------- ss_fire8 -------------------------
-#define PREZR_SS_FIRE8_CHECKSUM 0xB711449D
+#define PREZR_SS_FIRE8_CHECKSUM 0x1A7B3E54
 
 typedef enum prezr_pack_ss_fire8_e {
     PREZR_SS_FIRE8_SHT2G0, // 81x80 Bit8
@@ -717,7 +720,7 @@ extern void prezr_unload_ss_fire8();
 #endif // PREZR_IMPORT
 
 // ------------------------- ss_fire9 -------------------------
-#define PREZR_SS_FIRE9_CHECKSUM 0xB712083A
+#define PREZR_SS_FIRE9_CHECKSUM 0x1A7C010E
 
 typedef enum prezr_pack_ss_fire9_e {
     PREZR_SS_FIRE9_SHT2H0, // 77x85 Bit8
@@ -743,7 +746,7 @@ extern void prezr_unload_ss_fire9();
 #endif // PREZR_IMPORT
 
 // ------------------------- ss_static -------------------------
-#define PREZR_SS_STATIC_CHECKSUM 0xB7126A06
+#define PREZR_SS_STATIC_CHECKSUM 0x1A7C8385
 
 typedef enum prezr_pack_ss_static_e {
     PREZR_SS_STATIC_SHT2A0, // 59x55 Bit4Palettized
@@ -768,35 +771,8 @@ extern void prezr_load_ss_static();
 extern void prezr_unload_ss_static();
 #endif // PREZR_IMPORT
 
-// ------------------------- zombiewalk -------------------------
-#define PREZR_ZOMBIEWALK_CHECKSUM 0xB7130942
-
-typedef enum prezr_pack_zombiewalk_e {
-    PREZR_ZOMBIEWALK_SPOSA1, // 36x55 Bit8
-    PREZR_ZOMBIEWALK_SPOSC1, // 32x55 Bit8
-    PREZR_ZOMBIEWALK_COUNT
-} prezr_pack_zombiewalk_t;
-
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_ZOMBIEWALK_PACK)
-prezr_pack_t prezr_zombiewalk;
-void prezr_load_zombiewalk() {
-    int r = prezr_init(&prezr_zombiewalk, RESOURCE_ID_PREZR_ZOMBIEWALK_PACK);
-    if (r != PREZR_OK)
-        APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'zombiewalk' failed with code %d", r);
-    if (prezr_zombiewalk.numResources != PREZR_ZOMBIEWALK_COUNT)
-        APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'zombiewalk' resource count mismatch");
-}
-void prezr_unload_zombiewalk() {
-    prezr_destroy(&prezr_zombiewalk);
-}
-#else
-extern prezr_pack_t prezr_zombiewalk;
-extern void prezr_load_zombiewalk();
-extern void prezr_unload_zombiewalk();
-#endif // PREZR_IMPORT
-
 // ------------------------- zombiedie -------------------------
-#define PREZR_ZOMBIEDIE_CHECKSUM 0xB71441D7
+#define PREZR_ZOMBIEDIE_CHECKSUM 0x1A7DBC19
 
 typedef enum prezr_pack_zombiedie_e {
     PREZR_ZOMBIEDIE_SPOSG1, // 31x55 Bit8
@@ -824,5 +800,32 @@ void prezr_unload_zombiedie() {
 extern prezr_pack_t prezr_zombiedie;
 extern void prezr_load_zombiedie();
 extern void prezr_unload_zombiedie();
+#endif // PREZR_IMPORT
+
+// ------------------------- zombiewalk -------------------------
+#define PREZR_ZOMBIEWALK_CHECKSUM 0x1A7EA68E
+
+typedef enum prezr_pack_zombiewalk_e {
+    PREZR_ZOMBIEWALK_SPOSA1, // 36x55 Bit8
+    PREZR_ZOMBIEWALK_SPOSC1, // 32x55 Bit8
+    PREZR_ZOMBIEWALK_COUNT
+} prezr_pack_zombiewalk_t;
+
+#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_ZOMBIEWALK_PACK)
+prezr_pack_t prezr_zombiewalk;
+void prezr_load_zombiewalk() {
+    int r = prezr_init(&prezr_zombiewalk, RESOURCE_ID_PREZR_ZOMBIEWALK_PACK);
+    if (r != PREZR_OK)
+        APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'zombiewalk' failed with code %d", r);
+    if (prezr_zombiewalk.numResources != PREZR_ZOMBIEWALK_COUNT)
+        APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'zombiewalk' resource count mismatch");
+}
+void prezr_unload_zombiewalk() {
+    prezr_destroy(&prezr_zombiewalk);
+}
+#else
+extern prezr_pack_t prezr_zombiewalk;
+extern void prezr_load_zombiewalk();
+extern void prezr_unload_zombiewalk();
 #endif // PREZR_IMPORT
 
