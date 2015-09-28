@@ -352,8 +352,11 @@ void doom_time_changed(struct tm *t) {
   bool is_24h = clock_is_24h_style();
   int hour = t->tm_hour;
   
-  if (!is_24h && hour > 12) {
-    hour -= 12;
+  if (!is_24h) {
+    if (hour == 0)
+      hour = 12;
+    else if (hour > 12)
+      hour -= 12;
   }
   
   if (is_24h || hour > 9) {
