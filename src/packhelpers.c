@@ -2,12 +2,14 @@
 #include "packhelpers.h"
 
 void _load_pack(const char* name, prezr_pack_t* pack, uint32_t resource_id) {
+  unload_pack(pack);
   int r = prezr_init(pack, resource_id);
   if (r != PREZR_OK) {
     APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package '%s' failed with code %d", name, r);
   }
 }
 void _load_pack_placement(const char* name, prezr_pack_t* pack, uint32_t resource_id, void* heap, size_t heap_size) {
+  unload_placement_pack(pack);
   int r = prezr_placement_init(pack, resource_id, heap, heap_size);
   if (r != PREZR_OK) {
     APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package '%s' failed with code %d", name, r);

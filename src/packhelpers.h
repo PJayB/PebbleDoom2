@@ -7,6 +7,7 @@ typedef struct placement_block_s {
 
 #define load_pack(pack, resource_id) _load_pack(#pack, pack, resource_id)
 #define load_pack_placement(pack, heap, resource_id) _load_placement_pack(#pack, pack, resource_id, (heap)->ptr, (heap)->size)
+#define load_pack_placement_offset(pack, heap, offset, resource_id) _load_placement_pack(#pack, pack, resource_id, ((uint8_t*)(heap)->ptr) + (offset), (heap)->size - (offset))
 #define init_shared_placement_block(block, sizes, num_resources) _init_shared_placement_block(#block, block, sizes, num_resources)
 
 void _load_pack(const char* name, prezr_pack_t* pack, uint32_t resource_id);
