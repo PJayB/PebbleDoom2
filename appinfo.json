@@ -16,32 +16,32 @@
             },
             {
                 "file": "data/prezr.sg_fire3.blob",
-                "name": "PREZR_WEAPONFIRE3_PACK",
+                "name": "PREZR_SG_FIRE3_PACK",
                 "type": "raw"
             },
             {
                 "file": "data/prezr.sg_fire2.blob",
-                "name": "PREZR_WEAPONFIRE2_PACK",
+                "name": "PREZR_SG_FIRE2_PACK",
                 "type": "raw"
             },
             {
                 "file": "data/prezr.sg_fire1.blob",
-                "name": "PREZR_WEAPONFIRE1_PACK",
+                "name": "PREZR_SG_FIRE1_PACK",
                 "type": "raw"
             },
             {
                 "file": "data/prezr.zombiewalk.blob",
-                "name": "PREZR_PLAYERWALK_PACK",
+                "name": "PREZR_ZOMBIEWALK_PACK",
                 "type": "raw"
             },
             {
                 "file": "data/prezr.zombiedie.blob",
-                "name": "PREZR_PLAYERDIE_PACK",
+                "name": "PREZR_ZOMBIEDIE_PACK",
                 "type": "raw"
             },
             {
                 "file": "data/prezr.sg_static.blob",
-                "name": "PREZR_WEAPONSTATIC_PACK",
+                "name": "PREZR_SG_STATIC_PACK",
                 "type": "raw"
             },
             {
