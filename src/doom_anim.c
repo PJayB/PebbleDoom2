@@ -53,6 +53,7 @@ void start_zombie_die_anim(void) {
     ASSERT(!in_zombie_die);
     load_zombie_die_pack();
     set_image_and_center_bottom(layer_player, &zombie_pack.resources[0], zombiePos);
+    in_zombie_die = true;
 }
 
 void animate_zombie_die(size_t frame) {
@@ -77,9 +78,9 @@ bool in_weapon_fire = false;
 
 void start_weapon_static_anim(void) {
     ASSERT(!in_weapon_static);
+    in_weapon_static = true;
     load_weapon_static_pack();
     set_image_and_center_bottom(layer_weapon, &weapon_pack.resources[PREZR_SG_STATIC_SHTGA0], weaponPos);
-    in_weapon_static = true;
 }
 
 void show_muzzle_flash_anim(void) {
@@ -104,8 +105,8 @@ bool at_end_of_weapon_fire_anim(size_t index) {
 
 void start_weapon_fire_anim(void) {
     ASSERT(!in_weapon_fire);
-    animate_weapon_fire(0);
     in_weapon_fire = true;
+    animate_weapon_fire(0);
 }
 
 void animate_weapon_fire(size_t index) {

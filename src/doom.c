@@ -184,6 +184,8 @@ void fire_frame2(size_t frameNum) {
 
 void fire_frame(void* unused) {
     hide_muzzle_flash_anim();
+
+    end_weapon_static_anim();
     start_weapon_fire_anim();
 
     app_timer_register(
