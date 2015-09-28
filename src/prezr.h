@@ -18,6 +18,8 @@ typedef struct prezr_pack_s {
 #define PREZR_OUT_OF_MEMORY -3
 #define PREZR_ZERO_SIZE_BLOB -4
 #define PREZR_CONTAINER_TOO_SMALL -5
+  
+#define prezr_pack_default  {NULL, 0, NULL}
 
 void prezr_zero(prezr_pack_t* pack);
 int prezr_placement_init(prezr_pack_t* pack, uint32_t h, void* container, size_t container_size);

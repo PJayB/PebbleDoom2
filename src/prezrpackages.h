@@ -1,35 +1,13 @@
 #pragma once
 
 // ------------------------- background -------------------------
-#define PREZR_BACKGROUND_CHECKSUM 0xDEA94AD9
-
 typedef enum prezr_pack_background_e {
   PREZR_BACKGROUND_BACKGROUND, // 144x136 Bit8
   PREZR_BACKGROUND_STATUSBAR, // 144x32 Bit2Palettized
   PREZR_BACKGROUND_COUNT
 } prezr_pack_background_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_BACKGROUND_PACK)
-prezr_pack_t prezr_background = { NULL, 0, NULL };
-void prezr_load_background() {
-  int r = prezr_init(&prezr_background, RESOURCE_ID_PREZR_BACKGROUND_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'background' failed with code %d", r);
-  if (prezr_background.numResources != PREZR_BACKGROUND_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'background' resource count mismatch");
-}
-void prezr_unload_background() {
-  prezr_destroy(&prezr_background);
-}
-#else
-extern prezr_pack_t prezr_background;
-extern void prezr_load_background();
-extern void prezr_unload_background();
-#endif // PREZR_IMPORT
-
 // ------------------------- face0 -------------------------
-#define PREZR_FACE0_CHECKSUM 0xDEAA492F
-
 typedef enum prezr_pack_face0_e {
   PREZR_FACE0_STFST00, // 24x29 Bit4Palettized
   PREZR_FACE0_STFST01, // 24x29 Bit4Palettized
@@ -37,27 +15,7 @@ typedef enum prezr_pack_face0_e {
   PREZR_FACE0_COUNT
 } prezr_pack_face0_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_FACE0_PACK)
-prezr_pack_t prezr_face0 = { NULL, 0, NULL };
-void prezr_load_face0() {
-  int r = prezr_init(&prezr_face0, RESOURCE_ID_PREZR_FACE0_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'face0' failed with code %d", r);
-  if (prezr_face0.numResources != PREZR_FACE0_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'face0' resource count mismatch");
-}
-void prezr_unload_face0() {
-  prezr_destroy(&prezr_face0);
-}
-#else
-extern prezr_pack_t prezr_face0;
-extern void prezr_load_face0();
-extern void prezr_unload_face0();
-#endif // PREZR_IMPORT
-
 // ------------------------- face1 -------------------------
-#define PREZR_FACE1_CHECKSUM 0xDEAABE80
-
 typedef enum prezr_pack_face1_e {
   PREZR_FACE1_STFST10, // 24x29 Bit4Palettized
   PREZR_FACE1_STFST11, // 24x29 Bit8
@@ -65,27 +23,7 @@ typedef enum prezr_pack_face1_e {
   PREZR_FACE1_COUNT
 } prezr_pack_face1_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_FACE1_PACK)
-prezr_pack_t prezr_face1 = { NULL, 0, NULL };
-void prezr_load_face1() {
-  int r = prezr_init(&prezr_face1, RESOURCE_ID_PREZR_FACE1_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'face1' failed with code %d", r);
-  if (prezr_face1.numResources != PREZR_FACE1_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'face1' resource count mismatch");
-}
-void prezr_unload_face1() {
-  prezr_destroy(&prezr_face1);
-}
-#else
-extern prezr_pack_t prezr_face1;
-extern void prezr_load_face1();
-extern void prezr_unload_face1();
-#endif // PREZR_IMPORT
-
 // ------------------------- face2 -------------------------
-#define PREZR_FACE2_CHECKSUM 0xDEAB33DF
-
 typedef enum prezr_pack_face2_e {
   PREZR_FACE2_STFST20, // 24x30 Bit4Palettized
   PREZR_FACE2_STFST21, // 24x30 Bit8
@@ -93,27 +31,7 @@ typedef enum prezr_pack_face2_e {
   PREZR_FACE2_COUNT
 } prezr_pack_face2_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_FACE2_PACK)
-prezr_pack_t prezr_face2 = { NULL, 0, NULL };
-void prezr_load_face2() {
-  int r = prezr_init(&prezr_face2, RESOURCE_ID_PREZR_FACE2_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'face2' failed with code %d", r);
-  if (prezr_face2.numResources != PREZR_FACE2_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'face2' resource count mismatch");
-}
-void prezr_unload_face2() {
-  prezr_destroy(&prezr_face2);
-}
-#else
-extern prezr_pack_t prezr_face2;
-extern void prezr_load_face2();
-extern void prezr_unload_face2();
-#endif // PREZR_IMPORT
-
 // ------------------------- face3 -------------------------
-#define PREZR_FACE3_CHECKSUM 0xDEABBCC5
-
 typedef enum prezr_pack_face3_e {
   PREZR_FACE3_STFST30, // 24x31 Bit8
   PREZR_FACE3_STFST31, // 24x31 Bit8
@@ -121,27 +39,7 @@ typedef enum prezr_pack_face3_e {
   PREZR_FACE3_COUNT
 } prezr_pack_face3_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_FACE3_PACK)
-prezr_pack_t prezr_face3 = { NULL, 0, NULL };
-void prezr_load_face3() {
-  int r = prezr_init(&prezr_face3, RESOURCE_ID_PREZR_FACE3_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'face3' failed with code %d", r);
-  if (prezr_face3.numResources != PREZR_FACE3_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'face3' resource count mismatch");
-}
-void prezr_unload_face3() {
-  prezr_destroy(&prezr_face3);
-}
-#else
-extern prezr_pack_t prezr_face3;
-extern void prezr_load_face3();
-extern void prezr_unload_face3();
-#endif // PREZR_IMPORT
-
 // ------------------------- face4 -------------------------
-#define PREZR_FACE4_CHECKSUM 0xDEAC3226
-
 typedef enum prezr_pack_face4_e {
   PREZR_FACE4_STFST40, // 24x31 Bit8
   PREZR_FACE4_STFST41, // 24x31 Bit8
@@ -149,27 +47,7 @@ typedef enum prezr_pack_face4_e {
   PREZR_FACE4_COUNT
 } prezr_pack_face4_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_FACE4_PACK)
-prezr_pack_t prezr_face4 = { NULL, 0, NULL };
-void prezr_load_face4() {
-  int r = prezr_init(&prezr_face4, RESOURCE_ID_PREZR_FACE4_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'face4' failed with code %d", r);
-  if (prezr_face4.numResources != PREZR_FACE4_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'face4' resource count mismatch");
-}
-void prezr_unload_face4() {
-  prezr_destroy(&prezr_face4);
-}
-#else
-extern prezr_pack_t prezr_face4;
-extern void prezr_load_face4();
-extern void prezr_unload_face4();
-#endif // PREZR_IMPORT
-
 // ------------------------- facebattery -------------------------
-#define PREZR_FACEBATTERY_CHECKSUM 0xDEAD1CE4
-
 typedef enum prezr_pack_facebattery_e {
   PREZR_FACEBATTERY_STFEVL0, // 24x30 Bit8
   PREZR_FACEBATTERY_STFEVL1, // 24x30 Bit8
@@ -180,105 +58,25 @@ typedef enum prezr_pack_facebattery_e {
   PREZR_FACEBATTERY_COUNT
 } prezr_pack_facebattery_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_FACEBATTERY_PACK)
-prezr_pack_t prezr_facebattery = { NULL, 0, NULL };
-void prezr_load_facebattery() {
-  int r = prezr_init(&prezr_facebattery, RESOURCE_ID_PREZR_FACEBATTERY_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'facebattery' failed with code %d", r);
-  if (prezr_facebattery.numResources != PREZR_FACEBATTERY_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'facebattery' resource count mismatch");
-}
-void prezr_unload_facebattery() {
-  prezr_destroy(&prezr_facebattery);
-}
-#else
-extern prezr_pack_t prezr_facebattery;
-extern void prezr_load_facebattery();
-extern void prezr_unload_facebattery();
-#endif // PREZR_IMPORT
-
 // ------------------------- lamp_off -------------------------
-#define PREZR_LAMP_OFF_CHECKSUM 0xDEAD7EB0
-
 typedef enum prezr_pack_lamp_off_e {
   PREZR_LAMP_OFF_TLP2BG1, // 21x60 Bit4Palettized
   PREZR_LAMP_OFF_COUNT
 } prezr_pack_lamp_off_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_LAMP_OFF_PACK)
-prezr_pack_t prezr_lamp_off = { NULL, 0, NULL };
-void prezr_load_lamp_off() {
-  int r = prezr_init(&prezr_lamp_off, RESOURCE_ID_PREZR_LAMP_OFF_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'lamp_off' failed with code %d", r);
-  if (prezr_lamp_off.numResources != PREZR_LAMP_OFF_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'lamp_off' resource count mismatch");
-}
-void prezr_unload_lamp_off() {
-  prezr_destroy(&prezr_lamp_off);
-}
-#else
-extern prezr_pack_t prezr_lamp_off;
-extern void prezr_load_lamp_off();
-extern void prezr_unload_lamp_off();
-#endif // PREZR_IMPORT
-
 // ------------------------- lamp_on -------------------------
-#define PREZR_LAMP_ON_CHECKSUM 0xDEADCCED
-
 typedef enum prezr_pack_lamp_on_e {
   PREZR_LAMP_ON_TLP2BG2, // 21x60 Bit8
   PREZR_LAMP_ON_COUNT
 } prezr_pack_lamp_on_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_LAMP_ON_PACK)
-prezr_pack_t prezr_lamp_on = { NULL, 0, NULL };
-void prezr_load_lamp_on() {
-  int r = prezr_init(&prezr_lamp_on, RESOURCE_ID_PREZR_LAMP_ON_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'lamp_on' failed with code %d", r);
-  if (prezr_lamp_on.numResources != PREZR_LAMP_ON_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'lamp_on' resource count mismatch");
-}
-void prezr_unload_lamp_on() {
-  prezr_destroy(&prezr_lamp_on);
-}
-#else
-extern prezr_pack_t prezr_lamp_on;
-extern void prezr_load_lamp_on();
-extern void prezr_unload_lamp_on();
-#endif // PREZR_IMPORT
-
 // ------------------------- logo -------------------------
-#define PREZR_LOGO_CHECKSUM 0xDEAE1B33
-
 typedef enum prezr_pack_logo_e {
   PREZR_LOGO_STFKILL1, // 28x28 Bit8
   PREZR_LOGO_COUNT
 } prezr_pack_logo_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_LOGO_PACK)
-prezr_pack_t prezr_logo = { NULL, 0, NULL };
-void prezr_load_logo() {
-  int r = prezr_init(&prezr_logo, RESOURCE_ID_PREZR_LOGO_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'logo' failed with code %d", r);
-  if (prezr_logo.numResources != PREZR_LOGO_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'logo' resource count mismatch");
-}
-void prezr_unload_logo() {
-  prezr_destroy(&prezr_logo);
-}
-#else
-extern prezr_pack_t prezr_logo;
-extern void prezr_load_logo();
-extern void prezr_unload_logo();
-#endif // PREZR_IMPORT
-
 // ------------------------- numerals -------------------------
-#define PREZR_NUMERALS_CHECKSUM 0xDEAF1987
-
 typedef enum prezr_pack_numerals_e {
   PREZR_NUMERALS_STTNUM0, // 14x16 Bit4Palettized
   PREZR_NUMERALS_STTNUM1, // 11x16 Bit4Palettized
@@ -293,27 +91,7 @@ typedef enum prezr_pack_numerals_e {
   PREZR_NUMERALS_COUNT
 } prezr_pack_numerals_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_NUMERALS_PACK)
-prezr_pack_t prezr_numerals = { NULL, 0, NULL };
-void prezr_load_numerals() {
-  int r = prezr_init(&prezr_numerals, RESOURCE_ID_PREZR_NUMERALS_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'numerals' failed with code %d", r);
-  if (prezr_numerals.numResources != PREZR_NUMERALS_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'numerals' resource count mismatch");
-}
-void prezr_unload_numerals() {
-  prezr_destroy(&prezr_numerals);
-}
-#else
-extern prezr_pack_t prezr_numerals;
-extern void prezr_load_numerals();
-extern void prezr_unload_numerals();
-#endif // PREZR_IMPORT
-
 // ------------------------- playerdie -------------------------
-#define PREZR_PLAYERDIE_CHECKSUM 0xDEB1028A
-
 typedef enum prezr_pack_playerdie_e {
   PREZR_PLAYERDIE_PLAYG1, // 39x55 Bit8
   PREZR_PLAYERDIE_PLAYH0, // 44x50 Bit8
@@ -326,54 +104,14 @@ typedef enum prezr_pack_playerdie_e {
   PREZR_PLAYERDIE_COUNT
 } prezr_pack_playerdie_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_PLAYERDIE_PACK)
-prezr_pack_t prezr_playerdie = { NULL, 0, NULL };
-void prezr_load_playerdie() {
-  int r = prezr_init(&prezr_playerdie, RESOURCE_ID_PREZR_PLAYERDIE_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'playerdie' failed with code %d", r);
-  if (prezr_playerdie.numResources != PREZR_PLAYERDIE_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'playerdie' resource count mismatch");
-}
-void prezr_unload_playerdie() {
-  prezr_destroy(&prezr_playerdie);
-}
-#else
-extern prezr_pack_t prezr_playerdie;
-extern void prezr_load_playerdie();
-extern void prezr_unload_playerdie();
-#endif // PREZR_IMPORT
-
 // ------------------------- playerwalk -------------------------
-#define PREZR_PLAYERWALK_CHECKSUM 0xDEB1C62C
-
 typedef enum prezr_pack_playerwalk_e {
   PREZR_PLAYERWALK_PLAYA1, // 41x56 Bit8
   PREZR_PLAYERWALK_PLAYC1, // 38x56 Bit4Palettized
   PREZR_PLAYERWALK_COUNT
 } prezr_pack_playerwalk_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_PLAYERWALK_PACK)
-prezr_pack_t prezr_playerwalk = { NULL, 0, NULL };
-void prezr_load_playerwalk() {
-  int r = prezr_init(&prezr_playerwalk, RESOURCE_ID_PREZR_PLAYERWALK_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'playerwalk' failed with code %d", r);
-  if (prezr_playerwalk.numResources != PREZR_PLAYERWALK_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'playerwalk' resource count mismatch");
-}
-void prezr_unload_playerwalk() {
-  prezr_destroy(&prezr_playerwalk);
-}
-#else
-extern prezr_pack_t prezr_playerwalk;
-extern void prezr_load_playerwalk();
-extern void prezr_unload_playerwalk();
-#endif // PREZR_IMPORT
-
 // ------------------------- respawn -------------------------
-#define PREZR_RESPAWN_CHECKSUM 0xDEB39B96
-
 typedef enum prezr_pack_respawn_e {
   PREZR_RESPAWN_TFOGA0, // 41x56 Bit8
   PREZR_RESPAWN_TFOGB0, // 42x45 Bit4Palettized
@@ -388,392 +126,92 @@ typedef enum prezr_pack_respawn_e {
   PREZR_RESPAWN_COUNT
 } prezr_pack_respawn_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_RESPAWN_PACK)
-prezr_pack_t prezr_respawn = { NULL, 0, NULL };
-void prezr_load_respawn() {
-  int r = prezr_init(&prezr_respawn, RESOURCE_ID_PREZR_RESPAWN_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'respawn' failed with code %d", r);
-  if (prezr_respawn.numResources != PREZR_RESPAWN_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'respawn' resource count mismatch");
-}
-void prezr_unload_respawn() {
-  prezr_destroy(&prezr_respawn);
-}
-#else
-extern prezr_pack_t prezr_respawn;
-extern void prezr_load_respawn();
-extern void prezr_unload_respawn();
-#endif // PREZR_IMPORT
-
 // ------------------------- sg_fire1 -------------------------
-#define PREZR_SG_FIRE1_CHECKSUM 0xDEB5D2EA
-
 typedef enum prezr_pack_sg_fire1_e {
   PREZR_SG_FIRE1_SHTGB0, // 119x121 Bit8
   PREZR_SG_FIRE1_COUNT
 } prezr_pack_sg_fire1_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_SG_FIRE1_PACK)
-prezr_pack_t prezr_sg_fire1 = { NULL, 0, NULL };
-void prezr_load_sg_fire1() {
-  int r = prezr_init(&prezr_sg_fire1, RESOURCE_ID_PREZR_SG_FIRE1_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'sg_fire1' failed with code %d", r);
-  if (prezr_sg_fire1.numResources != PREZR_SG_FIRE1_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'sg_fire1' resource count mismatch");
-}
-void prezr_unload_sg_fire1() {
-  prezr_destroy(&prezr_sg_fire1);
-}
-#else
-extern prezr_pack_t prezr_sg_fire1;
-extern void prezr_load_sg_fire1();
-extern void prezr_unload_sg_fire1();
-#endif // PREZR_IMPORT
-
 // ------------------------- sg_fire2 -------------------------
-#define PREZR_SG_FIRE2_CHECKSUM 0xDEB78198
-
 typedef enum prezr_pack_sg_fire2_e {
   PREZR_SG_FIRE2_SHTGC0, // 87x151 Bit8
   PREZR_SG_FIRE2_COUNT
 } prezr_pack_sg_fire2_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_SG_FIRE2_PACK)
-prezr_pack_t prezr_sg_fire2 = { NULL, 0, NULL };
-void prezr_load_sg_fire2() {
-  int r = prezr_init(&prezr_sg_fire2, RESOURCE_ID_PREZR_SG_FIRE2_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'sg_fire2' failed with code %d", r);
-  if (prezr_sg_fire2.numResources != PREZR_SG_FIRE2_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'sg_fire2' resource count mismatch");
-}
-void prezr_unload_sg_fire2() {
-  prezr_destroy(&prezr_sg_fire2);
-}
-#else
-extern prezr_pack_t prezr_sg_fire2;
-extern void prezr_load_sg_fire2();
-extern void prezr_unload_sg_fire2();
-#endif // PREZR_IMPORT
-
 // ------------------------- sg_fire3 -------------------------
-#define PREZR_SG_FIRE3_CHECKSUM 0xDEB97DD1
-
 typedef enum prezr_pack_sg_fire3_e {
   PREZR_SG_FIRE3_SHTGD0, // 113x131 Bit8
   PREZR_SG_FIRE3_COUNT
 } prezr_pack_sg_fire3_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_SG_FIRE3_PACK)
-prezr_pack_t prezr_sg_fire3 = { NULL, 0, NULL };
-void prezr_load_sg_fire3() {
-  int r = prezr_init(&prezr_sg_fire3, RESOURCE_ID_PREZR_SG_FIRE3_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'sg_fire3' failed with code %d", r);
-  if (prezr_sg_fire3.numResources != PREZR_SG_FIRE3_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'sg_fire3' resource count mismatch");
-}
-void prezr_unload_sg_fire3() {
-  prezr_destroy(&prezr_sg_fire3);
-}
-#else
-extern prezr_pack_t prezr_sg_fire3;
-extern void prezr_load_sg_fire3();
-extern void prezr_unload_sg_fire3();
-#endif // PREZR_IMPORT
-
 // ------------------------- sg_static -------------------------
-#define PREZR_SG_STATIC_CHECKSUM 0xDEBA67F9
-
 typedef enum prezr_pack_sg_static_e {
   PREZR_SG_STATIC_SHTFA0, // 44x31 Bit4Palettized
   PREZR_SG_STATIC_SHTGA0, // 79x60 Bit8
   PREZR_SG_STATIC_COUNT
 } prezr_pack_sg_static_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_SG_STATIC_PACK)
-prezr_pack_t prezr_sg_static = { NULL, 0, NULL };
-void prezr_load_sg_static() {
-  int r = prezr_init(&prezr_sg_static, RESOURCE_ID_PREZR_SG_STATIC_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'sg_static' failed with code %d", r);
-  if (prezr_sg_static.numResources != PREZR_SG_STATIC_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'sg_static' resource count mismatch");
-}
-void prezr_unload_sg_static() {
-  prezr_destroy(&prezr_sg_static);
-}
-#else
-extern prezr_pack_t prezr_sg_static;
-extern void prezr_load_sg_static();
-extern void prezr_unload_sg_static();
-#endif // PREZR_IMPORT
-
 // ------------------------- ss_fire1 -------------------------
-#define PREZR_SS_FIRE1_CHECKSUM 0xDEBADD83
-
 typedef enum prezr_pack_ss_fire1_e {
   PREZR_SS_FIRE1_SHT2I0, // 55x37 Bit8
   PREZR_SS_FIRE1_COUNT
 } prezr_pack_ss_fire1_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_SS_FIRE1_PACK)
-prezr_pack_t prezr_ss_fire1 = { NULL, 0, NULL };
-void prezr_load_ss_fire1() {
-  int r = prezr_init(&prezr_ss_fire1, RESOURCE_ID_PREZR_SS_FIRE1_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire1' failed with code %d", r);
-  if (prezr_ss_fire1.numResources != PREZR_SS_FIRE1_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire1' resource count mismatch");
-}
-void prezr_unload_ss_fire1() {
-  prezr_destroy(&prezr_ss_fire1);
-}
-#else
-extern prezr_pack_t prezr_ss_fire1;
-extern void prezr_load_ss_fire1();
-extern void prezr_unload_ss_fire1();
-#endif // PREZR_IMPORT
-
 // ------------------------- ss_fire2 -------------------------
-#define PREZR_SS_FIRE2_CHECKSUM 0xDEBB5269
-
 typedef enum prezr_pack_ss_fire2_e {
   PREZR_SS_FIRE2_SHT2J0, // 65x46 Bit8
   PREZR_SS_FIRE2_COUNT
 } prezr_pack_ss_fire2_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_SS_FIRE2_PACK)
-prezr_pack_t prezr_ss_fire2 = { NULL, 0, NULL };
-void prezr_load_ss_fire2() {
-  int r = prezr_init(&prezr_ss_fire2, RESOURCE_ID_PREZR_SS_FIRE2_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire2' failed with code %d", r);
-  if (prezr_ss_fire2.numResources != PREZR_SS_FIRE2_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire2' resource count mismatch");
-}
-void prezr_unload_ss_fire2() {
-  prezr_destroy(&prezr_ss_fire2);
-}
-#else
-extern prezr_pack_t prezr_ss_fire2;
-extern void prezr_load_ss_fire2();
-extern void prezr_unload_ss_fire2();
-#endif // PREZR_IMPORT
-
 // ------------------------- ss_fire3 -------------------------
-#define PREZR_SS_FIRE3_CHECKSUM 0xDEBC8AF1
-
 typedef enum prezr_pack_ss_fire3_e {
   PREZR_SS_FIRE3_SHT2B0, // 83x103 Bit8
   PREZR_SS_FIRE3_COUNT
 } prezr_pack_ss_fire3_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_SS_FIRE3_PACK)
-prezr_pack_t prezr_ss_fire3 = { NULL, 0, NULL };
-void prezr_load_ss_fire3() {
-  int r = prezr_init(&prezr_ss_fire3, RESOURCE_ID_PREZR_SS_FIRE3_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire3' failed with code %d", r);
-  if (prezr_ss_fire3.numResources != PREZR_SS_FIRE3_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire3' resource count mismatch");
-}
-void prezr_unload_ss_fire3() {
-  prezr_destroy(&prezr_ss_fire3);
-}
-#else
-extern prezr_pack_t prezr_ss_fire3;
-extern void prezr_load_ss_fire3();
-extern void prezr_unload_ss_fire3();
-#endif // PREZR_IMPORT
-
 // ------------------------- ss_fire4 -------------------------
-#define PREZR_SS_FIRE4_CHECKSUM 0xDEBEADF8
-
 typedef enum prezr_pack_ss_fire4_e {
   PREZR_SS_FIRE4_SHT2C0, // 121x130 Bit8
   PREZR_SS_FIRE4_COUNT
 } prezr_pack_ss_fire4_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_SS_FIRE4_PACK)
-prezr_pack_t prezr_ss_fire4 = { NULL, 0, NULL };
-void prezr_load_ss_fire4() {
-  int r = prezr_init(&prezr_ss_fire4, RESOURCE_ID_PREZR_SS_FIRE4_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire4' failed with code %d", r);
-  if (prezr_ss_fire4.numResources != PREZR_SS_FIRE4_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire4' resource count mismatch");
-}
-void prezr_unload_ss_fire4() {
-  prezr_destroy(&prezr_ss_fire4);
-}
-#else
-extern prezr_pack_t prezr_ss_fire4;
-extern void prezr_load_ss_fire4();
-extern void prezr_unload_ss_fire4();
-#endif // PREZR_IMPORT
-
 // ------------------------- ss_fire5 -------------------------
-#define PREZR_SS_FIRE5_CHECKSUM 0xDEBFBF7C
-
 typedef enum prezr_pack_ss_fire5_e {
   PREZR_SS_FIRE5_SHT2D0, // 81x80 Bit8
   PREZR_SS_FIRE5_COUNT
 } prezr_pack_ss_fire5_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_SS_FIRE5_PACK)
-prezr_pack_t prezr_ss_fire5 = { NULL, 0, NULL };
-void prezr_load_ss_fire5() {
-  int r = prezr_init(&prezr_ss_fire5, RESOURCE_ID_PREZR_SS_FIRE5_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire5' failed with code %d", r);
-  if (prezr_ss_fire5.numResources != PREZR_SS_FIRE5_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire5' resource count mismatch");
-}
-void prezr_unload_ss_fire5() {
-  prezr_destroy(&prezr_ss_fire5);
-}
-#else
-extern prezr_pack_t prezr_ss_fire5;
-extern void prezr_load_ss_fire5();
-extern void prezr_unload_ss_fire5();
-#endif // PREZR_IMPORT
-
 // ------------------------- ss_fire6 -------------------------
-#define PREZR_SS_FIRE6_CHECKSUM 0xDEC1BB7B
-
 typedef enum prezr_pack_ss_fire6_e {
   PREZR_SS_FIRE6_SHT2E0, // 201x63 Bit8
   PREZR_SS_FIRE6_COUNT
 } prezr_pack_ss_fire6_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_SS_FIRE6_PACK)
-prezr_pack_t prezr_ss_fire6 = { NULL, 0, NULL };
-void prezr_load_ss_fire6() {
-  int r = prezr_init(&prezr_ss_fire6, RESOURCE_ID_PREZR_SS_FIRE6_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire6' failed with code %d", r);
-  if (prezr_ss_fire6.numResources != PREZR_SS_FIRE6_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire6' resource count mismatch");
-}
-void prezr_unload_ss_fire6() {
-  prezr_destroy(&prezr_ss_fire6);
-}
-#else
-extern prezr_pack_t prezr_ss_fire6;
-extern void prezr_load_ss_fire6();
-extern void prezr_unload_ss_fire6();
-#endif // PREZR_IMPORT
-
 // ------------------------- ss_fire7 -------------------------
-#define PREZR_SS_FIRE7_CHECKSUM 0xDEC27ED8
-
 typedef enum prezr_pack_ss_fire7_e {
   PREZR_SS_FIRE7_SHT2F0, // 88x51 Bit8
   PREZR_SS_FIRE7_COUNT
 } prezr_pack_ss_fire7_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_SS_FIRE7_PACK)
-prezr_pack_t prezr_ss_fire7 = { NULL, 0, NULL };
-void prezr_load_ss_fire7() {
-  int r = prezr_init(&prezr_ss_fire7, RESOURCE_ID_PREZR_SS_FIRE7_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire7' failed with code %d", r);
-  if (prezr_ss_fire7.numResources != PREZR_SS_FIRE7_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire7' resource count mismatch");
-}
-void prezr_unload_ss_fire7() {
-  prezr_destroy(&prezr_ss_fire7);
-}
-#else
-extern prezr_pack_t prezr_ss_fire7;
-extern void prezr_load_ss_fire7();
-extern void prezr_unload_ss_fire7();
-#endif // PREZR_IMPORT
-
 // ------------------------- ss_fire8 -------------------------
-#define PREZR_SS_FIRE8_CHECKSUM 0xDEC36948
-
 typedef enum prezr_pack_ss_fire8_e {
   PREZR_SS_FIRE8_SHT2G0, // 81x80 Bit8
   PREZR_SS_FIRE8_COUNT
 } prezr_pack_ss_fire8_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_SS_FIRE8_PACK)
-prezr_pack_t prezr_ss_fire8 = { NULL, 0, NULL };
-void prezr_load_ss_fire8() {
-  int r = prezr_init(&prezr_ss_fire8, RESOURCE_ID_PREZR_SS_FIRE8_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire8' failed with code %d", r);
-  if (prezr_ss_fire8.numResources != PREZR_SS_FIRE8_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire8' resource count mismatch");
-}
-void prezr_unload_ss_fire8() {
-  prezr_destroy(&prezr_ss_fire8);
-}
-#else
-extern prezr_pack_t prezr_ss_fire8;
-extern void prezr_load_ss_fire8();
-extern void prezr_unload_ss_fire8();
-#endif // PREZR_IMPORT
-
 // ------------------------- ss_fire9 -------------------------
-#define PREZR_SS_FIRE9_CHECKSUM 0xDEC47AC2
-
 typedef enum prezr_pack_ss_fire9_e {
   PREZR_SS_FIRE9_SHT2H0, // 77x85 Bit8
   PREZR_SS_FIRE9_COUNT
 } prezr_pack_ss_fire9_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_SS_FIRE9_PACK)
-prezr_pack_t prezr_ss_fire9 = { NULL, 0, NULL };
-void prezr_load_ss_fire9() {
-  int r = prezr_init(&prezr_ss_fire9, RESOURCE_ID_PREZR_SS_FIRE9_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire9' failed with code %d", r);
-  if (prezr_ss_fire9.numResources != PREZR_SS_FIRE9_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_fire9' resource count mismatch");
-}
-void prezr_unload_ss_fire9() {
-  prezr_destroy(&prezr_ss_fire9);
-}
-#else
-extern prezr_pack_t prezr_ss_fire9;
-extern void prezr_load_ss_fire9();
-extern void prezr_unload_ss_fire9();
-#endif // PREZR_IMPORT
-
 // ------------------------- ss_static -------------------------
-#define PREZR_SS_STATIC_CHECKSUM 0xDEC51705
-
 typedef enum prezr_pack_ss_static_e {
   PREZR_SS_STATIC_SHT2A0, // 59x55 Bit4Palettized
   PREZR_SS_STATIC_COUNT
 } prezr_pack_ss_static_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_SS_STATIC_PACK)
-prezr_pack_t prezr_ss_static = { NULL, 0, NULL };
-void prezr_load_ss_static() {
-  int r = prezr_init(&prezr_ss_static, RESOURCE_ID_PREZR_SS_STATIC_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_static' failed with code %d", r);
-  if (prezr_ss_static.numResources != PREZR_SS_STATIC_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'ss_static' resource count mismatch");
-}
-void prezr_unload_ss_static() {
-  prezr_destroy(&prezr_ss_static);
-}
-#else
-extern prezr_pack_t prezr_ss_static;
-extern void prezr_load_ss_static();
-extern void prezr_unload_ss_static();
-#endif // PREZR_IMPORT
-
 // ------------------------- zombiedie -------------------------
-#define PREZR_ZOMBIEDIE_CHECKSUM 0xDEC69DC1
-
 typedef enum prezr_pack_zombiedie_e {
   PREZR_ZOMBIEDIE_SPOSG1, // 31x55 Bit8
   PREZR_ZOMBIEDIE_SPOSH0, // 33x60 Bit8
@@ -784,48 +222,11 @@ typedef enum prezr_pack_zombiedie_e {
   PREZR_ZOMBIEDIE_COUNT
 } prezr_pack_zombiedie_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_ZOMBIEDIE_PACK)
-prezr_pack_t prezr_zombiedie = { NULL, 0, NULL };
-void prezr_load_zombiedie() {
-  int r = prezr_init(&prezr_zombiedie, RESOURCE_ID_PREZR_ZOMBIEDIE_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'zombiedie' failed with code %d", r);
-  if (prezr_zombiedie.numResources != PREZR_ZOMBIEDIE_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'zombiedie' resource count mismatch");
-}
-void prezr_unload_zombiedie() {
-  prezr_destroy(&prezr_zombiedie);
-}
-#else
-extern prezr_pack_t prezr_zombiedie;
-extern void prezr_load_zombiedie();
-extern void prezr_unload_zombiedie();
-#endif // PREZR_IMPORT
-
 // ------------------------- zombiewalk -------------------------
-#define PREZR_ZOMBIEWALK_CHECKSUM 0xDEC7611E
-
 typedef enum prezr_pack_zombiewalk_e {
   PREZR_ZOMBIEWALK_SPOSA1, // 36x55 Bit8
   PREZR_ZOMBIEWALK_SPOSC1, // 32x55 Bit8
   PREZR_ZOMBIEWALK_COUNT
 } prezr_pack_zombiewalk_t;
 
-#if defined(PREZR_IMPORT) || defined(PREZR_IMPORT_ZOMBIEWALK_PACK)
-prezr_pack_t prezr_zombiewalk = { NULL, 0, NULL };
-void prezr_load_zombiewalk() {
-  int r = prezr_init(&prezr_zombiewalk, RESOURCE_ID_PREZR_ZOMBIEWALK_PACK);
-  if (r != PREZR_OK)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'zombiewalk' failed with code %d", r);
-  if (prezr_zombiewalk.numResources != PREZR_ZOMBIEWALK_COUNT)
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package 'zombiewalk' resource count mismatch");
-}
-void prezr_unload_zombiewalk() {
-  prezr_destroy(&prezr_zombiewalk);
-}
-#else
-extern prezr_pack_t prezr_zombiewalk;
-extern void prezr_load_zombiewalk();
-extern void prezr_unload_zombiewalk();
-#endif // PREZR_IMPORT
 

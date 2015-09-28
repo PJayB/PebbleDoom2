@@ -1,39 +1,89 @@
 #include <pebble.h>
 #include "doom.h"
 #include "prezr.h"
-  
-#define PREZR_IMPORT_ZOMBIEWALK_PACK
-#define PREZR_IMPORT_ZOMBIEDIE_PACK
-#define PREZR_IMPORT_NUMERALS_PACK
-#define PREZR_IMPORT_SG_STATIC_PACK
-#define PREZR_IMPORT_SG_FIRE1_PACK
-#define PREZR_IMPORT_SG_FIRE2_PACK
-#define PREZR_IMPORT_SG_FIRE3_PACK
-#define PREZR_IMPORT_RESPAWN_PACK
-#define PREZR_IMPORT_LAMP_ON_PACK
-#define PREZR_IMPORT_LAMP_OFF_PACK
-#define PREZR_IMPORT_BACKGROUND_PACK
-#define PREZR_IMPORT_FACE0_PACK
-#define PREZR_IMPORT_FACE1_PACK
-#define PREZR_IMPORT_FACE2_PACK
-#define PREZR_IMPORT_FACE3_PACK
-#define PREZR_IMPORT_FACE4_PACK
-#define PREZR_IMPORT_FACEBATTERY_PACK
 #include "prezrpackages.h"
   
 static GPoint enemyPos = { 48+25, 18+56 };
 static GPoint weaponPos = { 69, 136 };
 static GPoint respawnPos = { 48+25, 18+28 };
 static const int numeric_height = 138;
-static const int weapon_fire_frames = 3;
+
+void _load_pack(const char* name, prezr_pack_t* pack, uint32_t resource_id) {
+  int r = prezr_init(pack, resource_id);
+  if (r != PREZR_OK) {
+    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package '%s' failed with code %d", name, r);
+  }
+}
+void _load_pack_placement(const char* name, prezr_pack_t* pack, uint32_t resource_id, void* heap, size_t heap_size) {
+  int r = prezr_placement_init(pack, resource_id, heap, heap_size);
+  if (r != PREZR_OK) {
+    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package '%s' failed with code %d", name, r);
+  }
+}
+
+#define load_pack(pack, resource_id) _load_pack(#pack, pack, resource_id)
+#define load_pack_placement(pack, resource_id, heap, heap_size) _load_placement_pack(#pack, pack, resource_id, heap, heap_size)
+
+typedef struct placement_block_s {
+  void* ptr;
+  size_t size;
+} placement_block_t;
+
+size_t get_resource_size(uint32_t resource_id) {
+  return resource_size(resource_get_handle(resource_id));
+}
+
+void init_shared_placement_block(const char* name, placement_block_t* block, const size_t* sizes, size_t num_resources) {
+  // Get the max size
+  size_t size = 0;
+  for (size_t i = 0; i < num_resources; ++i) {
+    if (sizes[i] > size) {
+      size = sizes[i];
+    }
+  }
+  
+  // Attempt to allocate that size
+  block->ptr = malloc(size);
+  block->size = (block->ptr == NULL) ? 0 : size;
+  
+  if (block->ptr == NULL) {
+    APP_LOG(APP_LOG_LEVEL_ERROR, "Placement block alloc failed '%s' %d bytes", name, size);    
+  }
+}
+
+void destroy_shared_placement_block(placement_block_t* block) {
+  free(block->ptr);
+  block->ptr = NULL;
+  block->size = 0;
+}
+
+// Placement memory for animating/frequently changing sprites
+placement_block_t weapon_mem = { NULL };
+placement_block_t zombie_mem = { NULL };
+placement_block_t face_mem = { NULL };
+
+// Static packs (or infrequently changing)
+prezr_pack_t background_pack = prezr_pack_default;
+prezr_pack_t numeric_pack = prezr_pack_default;
+prezr_pack_t lamp_pack = prezr_pack_default;
+prezr_pack_t muzzleflash_pack = prezr_pack_default;
+
+// Dynamic packs (frequently changing)
+prezr_pack_t weapon_pack = prezr_pack_default;
+prezr_pack_t zombie_pack = prezr_pack_default;
+prezr_pack_t face_pack = prezr_pack_default;
+
+void init_static_resources() {
+  
+}
 
 int face_index = 0;
-prezr_pack_t* current_face_pack = &prezr_face0;
 uint8_t batteryPercent = 100;
 bool batteryCharging = false;
 bool bluetoothState = false;
 bool walking = true;
 int walk_frame = 0;
+
 
 void image_center(Layer* layer, GPoint location, GSize size) {
   int16_t x = location.x - size.w / 2;
