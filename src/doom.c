@@ -2,259 +2,148 @@
 #include "doom.h"
 #include "prezr.h"
 #include "prezrpackages.h"
-  
-static GPoint enemyPos = { 48+25, 18+56 };
-static GPoint weaponPos = { 69, 136 };
-static GPoint respawnPos = { 48+25, 18+28 };
-static const int numeric_height = 138;
+#include "packhelpers.h"
+#include "spritehelpers.h"
 
-void _load_pack(const char* name, prezr_pack_t* pack, uint32_t resource_id) {
-  int r = prezr_init(pack, resource_id);
-  if (r != PREZR_OK) {
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package '%s' failed with code %d", name, r);
-  }
-}
-void _load_pack_placement(const char* name, prezr_pack_t* pack, uint32_t resource_id, void* heap, size_t heap_size) {
-  int r = prezr_placement_init(pack, resource_id, heap, heap_size);
-  if (r != PREZR_OK) {
-    APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package '%s' failed with code %d", name, r);
-  }
-}
+#define countof(x) (sizeof(x)/sizeof(x[0]))
 
-#define load_pack(pack, resource_id) _load_pack(#pack, pack, resource_id)
-#define load_pack_placement(pack, resource_id, heap, heap_size) _load_placement_pack(#pack, pack, resource_id, heap, heap_size)
-
-typedef struct placement_block_s {
-  void* ptr;
-  size_t size;
-} placement_block_t;
-
-size_t get_resource_size(uint32_t resource_id) {
-  return resource_size(resource_get_handle(resource_id));
-}
-
-void init_shared_placement_block(const char* name, placement_block_t* block, const size_t* sizes, size_t num_resources) {
-  // Get the max size
-  size_t size = 0;
-  for (size_t i = 0; i < num_resources; ++i) {
-    if (sizes[i] > size) {
-      size = sizes[i];
-    }
-  }
-  
-  // Attempt to allocate that size
-  block->ptr = malloc(size);
-  block->size = (block->ptr == NULL) ? 0 : size;
-  
-  if (block->ptr == NULL) {
-    APP_LOG(APP_LOG_LEVEL_ERROR, "Placement block alloc failed '%s' %d bytes", name, size);    
-  }
-}
-
-void destroy_shared_placement_block(placement_block_t* block) {
-  free(block->ptr);
-  block->ptr = NULL;
-  block->size = 0;
-}
-
-// Placement memory for animating/frequently changing sprites
-placement_block_t weapon_mem = { NULL };
-placement_block_t zombie_mem = { NULL };
-placement_block_t face_mem = { NULL };
-
-// Static packs (or infrequently changing)
-prezr_pack_t background_pack = prezr_pack_default;
-prezr_pack_t numeric_pack = prezr_pack_default;
-prezr_pack_t lamp_pack = prezr_pack_default;
-prezr_pack_t muzzleflash_pack = prezr_pack_default;
-
-// Dynamic packs (frequently changing)
-prezr_pack_t weapon_pack = prezr_pack_default;
-prezr_pack_t zombie_pack = prezr_pack_default;
-prezr_pack_t face_pack = prezr_pack_default;
-
-void init_static_resources() {
-  
-}
-
+// Global state
 int face_index = 0;
 uint8_t batteryPercent = 100;
 bool batteryCharging = false;
 bool bluetoothState = false;
 bool walking = true;
+bool can_start_new_anim = true;
 int walk_frame = 0;
+ 
+// Layout constants
+static GPoint enemyPos = { 48+25, 18+56 };
+static GPoint weaponPos = { 69, 136 };
+static GPoint respawnPos = { 48+25, 18+28 };
 
+// Placement memory for animating/frequently changing sprites
+placement_block_t weapon_mem = { NULL };
+placement_block_t zombie_mem = { NULL };
 
-void image_center(Layer* layer, GPoint location, GSize size) {
-  int16_t x = location.x - size.w / 2;
-  int16_t y = location.y - size.h / 2;
-  
-  GRect rect = {
-    { x, y, },
-    size
-  };
-  
-  layer_set_frame(layer, rect);
+// Static packs
+prezr_pack_t background_pack = prezr_pack_default;
+prezr_pack_t numeric_pack = prezr_pack_default;
+
+// Infrequently changing packs
+prezr_pack_t lamp_pack = prezr_pack_default;
+prezr_pack_t face_pack = prezr_pack_default;
+
+// Dynamic packs (frequently changing)
+prezr_pack_t weapon_pack = prezr_pack_default;
+prezr_pack_t zombie_pack = prezr_pack_default;
+prezr_pack_t respawn_pack = prezr_pack_default;
+size_t respawn_mem_offset = 0;
+
+void set_time_display(struct tm* t);
+
+// Initialize the resources that never change
+void init_static_resources() {
+  load_pack(&background_pack, RESOURCE_ID_PREZR_BACKGROUND_PACK);
+  load_pack(&numeric_pack, RESOURCE_ID_PREZR_NUMERIC_PACK);
+
+  bitmap_layer_set_bitmap(layer_level_bg, prezr_background.resources[PREZR_BACKGROUND_BACKGROUND].bitmap);
+  bitmap_layer_set_bitmap(layer_statusbar_bg, prezr_background.resources[PREZR_BACKGROUND_STATUSBAR].bitmap);
+}
+void destroy_static_resources() {
+    prezr_destroy(&background_pack);
+    prezr_destroy(&numeric_pack);
 }
 
-void image_center_bottom(Layer* layer, GPoint location, GSize size) {
-  int16_t x = location.x - size.w / 2;
-  int16_t y = location.y - size.h;
-  
-  GRect rect = {
-    { x, y, },
-    size
-  };
-  
-  layer_set_frame(layer, rect);
+// Shorthand APIs for switching animations
+void load_zombie_walk() {
+    unload_placement_pack(&zombie_pack);
+    load_placement_pack(&zombie_pack, &zombie_mem, RESOURCE_ID_PREZR_ZOMBIEWALK_PACK);
+    set_image_and_center_bottom(layer_player, &zombie_pack.resources[0], zombiePos);
+}
+void load_zombie_die() {
+    unload_placement_pack(&zombie_pack);
+    load_placement_pack(&zombie_pack, &zombie_mem, RESOURCE_ID_PREZR_ZOMBIEDIE_PACK);
+    set_image_and_center_bottom(layer_player, &zombie_pack.resources[0], zombiePos);
 }
 
-void set_image_and_center(BitmapLayer* layer, const prezr_bitmap_t* resource, GPoint location) {
-  bitmap_layer_set_bitmap(layer, resource->bitmap);
-  image_center(bitmap_layer_get_layer(layer), location, GSize(resource->width, resource->height));
+void load_sg_static() {
+    unload_placement_pack(&weapon_pack);
+    load_placement_pack(&weapon_pack, &weapon_mem, RESOURCE_ID_PREZR_SG_STATIC_PACK);
+    set_image_and_center_bottom(layer_weapon, &weapon_pack.resources[PREZR_SG_STATIC_SHTGA0], weaponPos);
+}
+void load_sg_fire(size_t index) {
+    unload_placement_pack(&weapon_pack);
+    switch (index) {
+        case 0: load_placement_pack(&weapon_pack, &weapon_mem, RESOURCE_ID_PREZR_SG_FIRE1_PACK);
+        case 1: load_placement_pack(&weapon_pack, &weapon_mem, RESOURCE_ID_PREZR_SG_FIRE2_PACK);
+        case 2: load_placement_pack(&weapon_pack, &weapon_mem, RESOURCE_ID_PREZR_SG_FIRE3_PACK);
+    }
+    set_image_and_center_bottom(layer_weapon, &weapon_pack.resources[0], weaponPos);
 }
 
-void set_image_and_center_bottom(BitmapLayer* layer, const prezr_bitmap_t* resource, GPoint location) {
-  bitmap_layer_set_bitmap(layer, resource->bitmap);
-  image_center_bottom(bitmap_layer_get_layer(layer), location, GSize(resource->width, resource->height));
-}
-  
-// BEGIN AUTO-GENERATED UI CODE; DO NOT MODIFY
-static Window *s_window;
-static BitmapLayer *statusbar_bg;
-static BitmapLayer *level_bg;
-static BitmapLayer *player;
-static BitmapLayer *lamp;
-static BitmapLayer *num0;
-static BitmapLayer *num1;
-static BitmapLayer *num2;
-static BitmapLayer *num3;
-static BitmapLayer *weapon;
-static BitmapLayer *muzzleflash;
-static BitmapLayer *face;
-static BitmapLayer *respawnoverlay;
+void load_respawn() {
+    // Where do we put it in memory?
 
-static void initialise_ui(void) {
-  s_window = window_create();
-  #ifndef PBL_SDK_3
-    window_set_fullscreen(s_window, true);
-  #endif
-      
-  // statusbar_bg
-  statusbar_bg = bitmap_layer_create(GRect(0, 136, 144, 32));
-  bitmap_layer_set_background_color(statusbar_bg, GColorBlack);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)statusbar_bg);
-  
-  // level_bg
-  level_bg = bitmap_layer_create(GRect(0, 0, 144, 136));
-  bitmap_layer_set_background_color(level_bg, GColorWhite);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)level_bg);
-  
-  // player
-  player = bitmap_layer_create(GRect(48, 18, 50, 56));
-  bitmap_layer_set_background_color(player, GColorClear);
-  bitmap_layer_set_compositing_mode(player, GCompOpSet);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)player);
-  
-  // respawn
-  respawnoverlay = bitmap_layer_create(GRect(48, 18, 50, 56));
-  bitmap_layer_set_background_color(respawnoverlay, GColorClear);
-  bitmap_layer_set_compositing_mode(respawnoverlay, GCompOpSet);
-  layer_set_hidden(bitmap_layer_get_layer(respawnoverlay), true);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)respawnoverlay);
-  
-  // lamp
-  lamp = bitmap_layer_create(GRect(110, 27, 21, 60));
-  bitmap_layer_set_background_color(lamp, GColorClear);
-  bitmap_layer_set_compositing_mode(lamp, GCompOpSet);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)lamp);
-  
-  // weapon
-  weapon = bitmap_layer_create(GRect(30, 76, 79, 60));
-  bitmap_layer_set_background_color(weapon, GColorClear);
-  bitmap_layer_set_compositing_mode(weapon, GCompOpSet);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)weapon);
-  
-  // muzzleflash
-  muzzleflash = bitmap_layer_create(GRect(50, 63, 44, 31));
-  bitmap_layer_set_background_color(muzzleflash, GColorClear);
-  bitmap_layer_set_compositing_mode(muzzleflash, GCompOpSet);
-  layer_set_hidden(bitmap_layer_get_layer(muzzleflash), true);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)muzzleflash);
-  
-  // num0
-  num0 = bitmap_layer_create(GRect(13, numeric_height, 14, 16));
-  bitmap_layer_set_background_color(num0, GColorClear);
-  bitmap_layer_set_compositing_mode(num0, GCompOpSet);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)num0);
-  
-  // num1
-  num1 = bitmap_layer_create(GRect(27, numeric_height, 14, 16));
-  bitmap_layer_set_background_color(num1, GColorClear);
-  bitmap_layer_set_compositing_mode(num1, GCompOpSet);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)num1);
-  
-  // num2
-  num2 = bitmap_layer_create(GRect(102, numeric_height, 14, 16));
-  bitmap_layer_set_background_color(num2, GColorClear);
-  bitmap_layer_set_compositing_mode(num2, GCompOpSet);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)num2);
-  
-  // num3
-  num3 = bitmap_layer_create(GRect(116, numeric_height, 14, 16));
-  bitmap_layer_set_background_color(num3, GColorClear);
-  bitmap_layer_set_compositing_mode(num3, GCompOpSet);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)num3);
-  
-  // face
-  face = bitmap_layer_create(GRect(58, numeric_height - 1, 29, 30));
-  bitmap_layer_set_background_color(face, GColorClear);
-  bitmap_layer_set_compositing_mode(face, GCompOpSet);
-  layer_add_child(window_get_root_layer(s_window), (Layer *)face);
+
+    set_image_and_center(layer_respawnoverlay, &respawn_pack.resources[0], respawnPos);
 }
 
-static void destroy_ui(void) {
-  window_destroy(s_window);
-  bitmap_layer_destroy(statusbar_bg);
-  bitmap_layer_destroy(level_bg);
-  bitmap_layer_destroy(player);
-  bitmap_layer_destroy(lamp);
-  bitmap_layer_destroy(weapon);
-  bitmap_layer_destroy(num0);
-  bitmap_layer_destroy(num1);
-  bitmap_layer_destroy(num2);
-  bitmap_layer_destroy(num3);
-}
-// END AUTO-GENERATED UI CODE
+// Initialization of dynamic resources is done on-the-fly. This just does cleanup.
+void init_dynamic_resources() {
 
+    // Remember where the re
+    respawn_mem_offset
+
+    size_t zombie_resource_sizes[] = {
+        // Walk and respawn must be co-resident, but zombie die is standalone
+        get_resource_size(RESOURCE_ID_PREZR_ZOMBIEWALK_PACK) + get_resource_size(RESOURCE_ID_PREZR_RESPAWN_PACK),
+        get_resource_size(RESOURCE_ID_PREZR_ZOMBIEDIE_PACK)
+    };
+
+    size_t weapon_resource_sizes[] = {
+        get_resource_size(RESOURCE_ID_SG_STATIC_PACK),
+        get_resource_size(RESOURCE_ID_SG_FIRE1_PACK),
+        get_resource_size(RESOURCE_ID_SG_FIRE2_PACK),
+        get_resource_size(RESOURCE_ID_SG_FIRE3_PACK)
+    };
+
+    // Allocate the memory for the animations
+    init_shared_placement_block(&zombie_mem, zombie_resource_sizes, countof(zombie_resource_sizes));
+    init_shared_placement_block(&weapon_mem, weapon_resource_sizes, countof(weapon_resource_sizes));
+
+    // Set up the default state
+    load_zombie_walk();
+    load_sg_static();
+}
+void destroy_dynamic_resources() {
+    // Infrequently changing packs
+    prezr_destroy(&lamp_pack);
+    prezr_destroy(&face_pack);
+
+    // Frequently changing
+    prezr_placement_destroy(&respawn_pack);
+    prezr_placement_destroy(&weapon_pack);
+    prezr_placement_destroy(&zombie_pack);
+
+    // Placement buffers
+    destroy_shared_placement_block(&weapon_mem);
+    destroy_shared_placement_block(&zombie_mem);
+}
+
+// Destructor
 static void handle_window_unload(Window* window) {
-  destroy_ui();
+  doom_destroy_ui();
   
   // delete images
-  prezr_unload_background();
-  prezr_unload_zombiewalk();
-  prezr_unload_lamp_on();
-  prezr_unload_sg_static();
-  prezr_unload_numerals();
-  prezr_unload_face0();
+  destroy_static_resources();
+  destroy_dynamic_resources();
 }
 
+// Constructor
 void doom_init(struct tm* init_time, uint8_t batteryPercent, bool isCharging, bool hasBluetooth) {
-  initialise_ui();
-  
-  // load images
-  prezr_load_background();
-  bitmap_layer_set_bitmap(level_bg, prezr_background.resources[PREZR_BACKGROUND_BACKGROUND].bitmap);
-  bitmap_layer_set_bitmap(statusbar_bg, prezr_background.resources[PREZR_BACKGROUND_STATUSBAR].bitmap);
-  prezr_load_numerals();
-  prezr_load_face0();
-  bitmap_layer_set_bitmap(face, prezr_face0.resources[0].bitmap);
-    
-  prezr_load_sg_static();
-  set_image_and_center_bottom(weapon, &prezr_sg_static.resources[PREZR_SG_STATIC_SHTGA0], weaponPos);
-  
-  prezr_load_zombiewalk();
-  set_image_and_center_bottom(player, &prezr_zombiewalk.resources[0], enemyPos);
+  doom_initialise_ui();
+  init_static_resources();
+  init_dynamic_resources();
   
   // Fire event handlers and set initial state
   doom_time_changed(init_time);
@@ -309,6 +198,9 @@ void respawn_frame(size_t frameNum) {
     // end of animation - end respawn
     layer_set_hidden(bitmap_layer_get_layer(respawnoverlay), true);
     prezr_unload_respawn();
+
+    // end of entire animation
+    can_start_new_anim = true;
   } else {
     // continue the animation
     frameNum++;
@@ -322,16 +214,13 @@ void respawn_frame(size_t frameNum) {
 }
 
 void respawn(void) {
-  prezr_unload_zombiedie();
-  prezr_load_zombiewalk();
-  set_image_and_center_bottom(player, &prezr_zombiewalk.resources[walk_frame], enemyPos);
+  load_zombie_walk();
   walking = true;
   
-  prezr_load_respawn();  
+  load_respawn();  
   
   // show respawn sprite
   layer_set_hidden(bitmap_layer_get_layer(respawnoverlay), false);
-  set_image_and_center(respawnoverlay, &prezr_respawn.resources[0], respawnPos);
   
   app_timer_register(
     respawn_frame_delay, 
@@ -398,7 +287,7 @@ void fire_frame(void* unused) {
       (void*) 0);
 }
 
-void doom_time_changed(struct tm *t) {
+void set_time_display(struct tm* t) {
   bool is_24h = clock_is_24h_style();
   int hour = t->tm_hour;
   
@@ -421,13 +310,14 @@ void doom_time_changed(struct tm *t) {
   bitmap_layer_set_bitmap(num1, prezr_numerals.resources[hour % 10].bitmap);
   bitmap_layer_set_bitmap(num2, prezr_numerals.resources[t->tm_min / 10].bitmap);
   bitmap_layer_set_bitmap(num3, prezr_numerals.resources[t->tm_min % 10].bitmap);
-  
-  if (walking) {
+}
+
+void doom_play_animation(void) {
+  if (can_start_new_anim) {
     // evict the walk animation and load the die animation
-    prezr_unload_zombiewalk();
-    prezr_load_zombiedie();
-    set_image_and_center_bottom(player, &prezr_zombiedie.resources[0], enemyPos);
+    load_zombiedie();
     walking = false;
+    can_start_new_anim = false;
     
     // show muzzleflash
     layer_set_hidden(bitmap_layer_get_layer(muzzleflash), false);
@@ -445,6 +335,11 @@ void doom_time_changed(struct tm *t) {
         (AppTimerCallback) die_frame,
         (void*) 0);
   }
+}
+
+void doom_time_changed(struct tm *t) {
+  set_time_display(t);
+  doom_play_animation();
 }
 
 void doom_battery_level_changed(uint8_t percent, bool charging) {

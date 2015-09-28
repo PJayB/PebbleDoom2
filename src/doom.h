@@ -6,4 +6,5 @@ void doom_time_changed(struct tm *tick_time);
 void doom_animate(void);
 void doom_battery_level_changed(uint8_t percent, bool charging);
 void doom_bluetooth_changed(bool connected);
+void doom_play_animation(void);
 
