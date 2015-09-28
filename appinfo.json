@@ -1,11 +1,21 @@
 {
+    "uuid": "5d977290-f06f-4ae8-b864-1ed54601d833",
     "appKeys": {},
+    "companyName": "GeekyPanda",
+    "sdkVersion": "3",
+    "longName": "DOOM 2",
+    "shortName": "DOOM 2",
+    "projectType": "native",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    },
+    "targetPlatforms": [
+        "basalt"
+    ],
     "capabilities": [
         ""
     ],
-    "companyName": "GeekyPanda",
-    "longName": "PEBBLE DOOM 2",
-    "projectType": "native",
     "resources": {
         "media": [
             {
@@ -100,15 +110,5 @@
                 "type": "raw"
             }
         ]
-    },
-    "sdkVersion": "3",
-    "shortName": "PEBBLEDOOM2",
-    "targetPlatforms": [
-        "basalt"
-    ],
-    "uuid": "5d977290-f06f-4ae8-b864-1ed54601d833",
-    "versionLabel": "1.0",
-    "watchapp": {
-        "watchface": true
     }
 }
