@@ -1,4 +1,5 @@
 #include <pebble.h>
+#include "prezr.h"
 #include "packhelpers.h"
 
 void _load_pack(const char* name, prezr_pack_t* pack, uint32_t resource_id) {
@@ -9,7 +10,7 @@ void _load_pack(const char* name, prezr_pack_t* pack, uint32_t resource_id) {
   }
 }
 void _load_pack_placement(const char* name, prezr_pack_t* pack, uint32_t resource_id, void* heap, size_t heap_size) {
-  unload_placement_pack(pack);
+  unload_pack_placement(pack);
   int r = prezr_placement_init(pack, resource_id, heap, heap_size);
   if (r != PREZR_OK) {
     APP_LOG(APP_LOG_LEVEL_ERROR, "PRezr package '%s' failed with code %d", name, r);
@@ -20,7 +21,7 @@ void unload_pack(prezr_pack_t* pack) {
     prezr_destroy(pack);
 }
 void unload_pack_placement(prezr_pack_t* pack) {
-    prezr_placement_destroy(&pack);
+    prezr_placement_destroy(pack);
 }
 
 size_t get_resource_size(uint32_t resource_id) {

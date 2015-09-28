@@ -1,4 +1,5 @@
 #include <pebble.h>
+#include "prezr.h"
 #include "spritehelpers.h"
 
 void image_center(Layer* layer, GPoint location, GSize size) {

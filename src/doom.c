@@ -6,6 +6,7 @@
 #include "spritehelpers.h"
 #include "doom_ui.h"
 #include "doom_anim.h"
+#include "doom_res.h"
 
 // Global state
 uint8_t batteryPercent = 100;
@@ -13,6 +14,10 @@ bool batteryCharging = false;
 bool bluetoothState = false;
 bool walking = true;
 bool can_start_new_anim = true;
+
+void set_time_display(struct tm* t);
+void set_battery_status(uint8_t percent, bool charging);
+void set_bluetooth_status(bool hasBluetooth);
 
 // Destructor
 static void handle_window_unload(Window* window) {
@@ -25,6 +30,10 @@ void doom_init(struct tm* init_time, uint8_t batteryPercent, bool isCharging, bo
     // Load resources
     doom_initialise_ui();
     load_resources();
+    
+    // Set background images
+    bitmap_layer_set_bitmap(layer_level_bg, get_background_resource());
+    bitmap_layer_set_bitmap(layer_statusbar_bg, get_statusbar_resource());    
 
     // Fire event handlers and set initial state
     set_time_display(init_time);
@@ -62,17 +71,17 @@ void set_time_display(struct tm* t) {
 
     if (is_24h || hour > 9) {
         // two numbers here
-        layer_set_hidden(bitmap_layer_get_layer(num0), false);
-        bitmap_layer_set_bitmap(num0, get_numeral_resource(hour / 10));
+        layer_set_hidden(bitmap_layer_get_layer(layer_num0), false);
+        bitmap_layer_set_bitmap(layer_num0, get_numeral_resource(hour / 10));
     }
     else {
         // single digit
-        layer_set_hidden(bitmap_layer_get_layer(num0), true);
+        layer_set_hidden(bitmap_layer_get_layer(layer_num0), true);
     }
 
-    bitmap_layer_set_bitmap(num1, get_numeral_resource(hour % 10]));
-    bitmap_layer_set_bitmap(num2, get_numeral_resource(t->tm_min / 10]));
-    bitmap_layer_set_bitmap(num3, get_numeral_resource(t->tm_min % 10]));
+    bitmap_layer_set_bitmap(layer_num1, get_numeral_resource(hour % 10));
+    bitmap_layer_set_bitmap(layer_num2, get_numeral_resource(t->tm_min / 10));
+    bitmap_layer_set_bitmap(layer_num3, get_numeral_resource(t->tm_min % 10));
 }
 
 void set_battery_status(uint8_t percent, bool charging) {
@@ -194,8 +203,8 @@ void doom_play_kill_animation(void) {
         can_start_new_anim = false;
 
         // evict the walk animation and load the die animation
-        stop_zombie_walk_anim();
-        start_zombie_die();
+        end_zombie_walk_anim();
+        start_zombie_die_anim();
 
         // show muzzleflash
         show_muzzle_flash_anim();

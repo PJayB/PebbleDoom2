@@ -12,6 +12,10 @@ void unload_resources(void);
 void load_zombie_walk_pack(void);
 void load_zombie_die_pack(void);
 
+uint32_t get_weapon_fire_anim_resource(size_t index);
+void load_weapon_static_pack(void);
+void load_weapon_fire_pack(uint32_t index);
+
 void load_respawn_pack(void);
 void unload_respawn_pack(void);
 
@@ -34,7 +38,8 @@ const GBitmap* get_background_resource(void);
 const GBitmap* get_statusbar_resource(void);
 const GBitmap* get_lamp_resource(void);
 const GBitmap* get_numeral_resource(uint32_t num);
-const GBitmap* get_face_resource(uin32_t index);
+const GBitmap* get_face_resource(uint32_t index);
+const GBitmap* get_random_face_resource(void);
 
 // Dynamic packs (frequently changing so directly exposed)
 extern prezr_pack_t weapon_pack;

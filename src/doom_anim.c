@@ -5,9 +5,10 @@
 #include "doom_res.h"
 #include "doom_anim.h"
 #include "doom_ui.h"
+#include "spritehelpers.h"
 
 // Layout constants
-static const GPoint enemyPos = {48 + 25, 18 + 56};
+static const GPoint zombiePos = {48 + 25, 18 + 56};
 static const GPoint weaponPos = {69, 136};
 static const GPoint respawnPos = {48 + 25, 18 + 28};
 
@@ -29,14 +30,14 @@ bool in_zombie_walk = false;
 bool in_zombie_die = false;
 int walk_frame = 0;
 
-void start_zombie_walk(void) {
+void start_zombie_walk_anim(void) {
     ASSERT(!in_zombie_die);
     load_zombie_walk_pack();
     set_image_and_center_bottom(layer_player, &zombie_pack.resources[0], zombiePos);
     in_zombie_walk = true;
 }
 
-void animate_zombie_walk_anim(void) {
+void animate_zombie_walk(void) {
     ASSERT(in_zombie_walk);
 
     walk_frame ^= 1;
@@ -54,7 +55,7 @@ void start_zombie_die_anim(void) {
     set_image_and_center_bottom(layer_player, &zombie_pack.resources[0], zombiePos);
 }
 
-void animate_zombie_die_anim(size_t frame) {
+void animate_zombie_die(size_t frame) {
     ASSERT(in_zombie_die);
     set_image_and_center_bottom(layer_player, &zombie_pack.resources[frame], zombiePos);
 }
@@ -76,7 +77,7 @@ bool in_weapon_fire = false;
 
 void start_weapon_static_anim(void) {
     ASSERT(!in_weapon_static);
-    load_pack_placement(&weapon_pack, &weapon_mem, RESOURCE_ID_PREZR_SG_STATIC_PACK);
+    load_weapon_static_pack();
     set_image_and_center_bottom(layer_weapon, &weapon_pack.resources[PREZR_SG_STATIC_SHTGA0], weaponPos);
     in_weapon_static = true;
 }
@@ -97,15 +98,6 @@ void end_weapon_static_anim(void) {
     in_weapon_static = false;
 }
 
-uint32_t get_weapon_fire_anim_resource(size_t index) {
-    switch (index) {
-    case 0: return RESOURCE_ID_PREZR_SG_FIRE1_PACK;
-    case 1: return RESOURCE_ID_PREZR_SG_FIRE2_PACK;
-    case 2: return RESOURCE_ID_PREZR_SG_FIRE3_PACK;
-    default: return 0;
-    }
-}
-
 bool at_end_of_weapon_fire_anim(size_t index) {
     return get_weapon_fire_anim_resource(index+1) != 0;
 }
@@ -118,14 +110,11 @@ void start_weapon_fire_anim(void) {
 
 void animate_weapon_fire(size_t index) {
     ASSERT(in_weapon_fire);
-    uint32_t res = get_weapon_fire_anim_resource(index);
-    if (res != 0) {
-        load_pack_placement(&weapon_pack, &weapon_mem, res);
-        set_image_and_center_bottom(layer_weapon, &weapon_pack.resources[0], weaponPos);
-    }
+    load_weapon_fire_pack(index);
+    set_image_and_center_bottom(layer_weapon, &weapon_pack.resources[0], weaponPos);
 }
 
-void end_weapon_fire_anum(void) {
+void end_weapon_fire_anim(void) {
     ASSERT(in_weapon_fire);
     in_weapon_fire = false;
 }
@@ -201,15 +190,14 @@ void animate_face(uint8_t health, bool charging) {
     }
     else {
         ASSERT(!in_charging);
-        uint32_t face_index = rand() % face_pack.numResources;
-        bitmap_layer_set_bitmap(layer_face, get_face_resource(face_index));
+        bitmap_layer_set_bitmap(layer_face, get_random_face_resource());
     }
 }
 
 //
 // Lamp animation
 //
-void set_lamp_anim(bool on) {
-    change_bluetooth_pack(hasBluetooth);
-    bitmap_layer_set_bitmap(layer_lamp, lamp_pack.resources[0].bitmap);
+void start_lamp_anim(bool on) {
+    change_bluetooth_pack(on);
+    bitmap_layer_set_bitmap(layer_lamp, get_lamp_resource());
 }

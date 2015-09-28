@@ -1,4 +1,5 @@
 #include <pebble.h>
+#include "prezr.h"
 #include "prezrpackages.h"
 #include "packhelpers.h"
 #include "doom_res.h"
@@ -32,10 +33,7 @@ size_t get_respawn_mem_offset() {
 // Initialize the resources that never change
 void init_static_resources(void) {
     load_pack(&background_pack, RESOURCE_ID_PREZR_BACKGROUND_PACK);
-    load_pack(&numeric_pack, RESOURCE_ID_PREZR_NUMERIC_PACK);
-
-    bitmap_layer_set_bitmap(layer_level_bg, prezr_background.resources[PREZR_BACKGROUND_BACKGROUND].bitmap);
-    bitmap_layer_set_bitmap(layer_statusbar_bg, prezr_background.resources[PREZR_BACKGROUND_STATUSBAR].bitmap);
+    load_pack(&numeric_pack, RESOURCE_ID_PREZR_NUMERALS_PACK);
 }
 void destroy_static_resources(void) {
     prezr_destroy(&background_pack);
@@ -54,10 +52,10 @@ void init_dynamic_resources(void) {
     };
 
     size_t weapon_resource_sizes[] = {
-        get_resource_size(RESOURCE_ID_SG_STATIC_PACK),
-        get_resource_size(RESOURCE_ID_SG_FIRE1_PACK),
-        get_resource_size(RESOURCE_ID_SG_FIRE2_PACK),
-        get_resource_size(RESOURCE_ID_SG_FIRE3_PACK)
+        get_resource_size(RESOURCE_ID_PREZR_SG_STATIC_PACK),
+        get_resource_size(RESOURCE_ID_PREZR_SG_FIRE1_PACK),
+        get_resource_size(RESOURCE_ID_PREZR_SG_FIRE2_PACK),
+        get_resource_size(RESOURCE_ID_PREZR_SG_FIRE3_PACK)
     };
 
     size_t face_resource_sizes[] = {
@@ -70,8 +68,8 @@ void init_dynamic_resources(void) {
     };
 
     size_t lamp_resource_sizes[] = {
-        get_resource_size(RESOURCE_ID_SG_LAMP_ON_PACK),
-        get_resource_size(RESOURCE_ID_SG_LAMP_OFF_PACK)
+        get_resource_size(RESOURCE_ID_PREZR_LAMP_ON_PACK),
+        get_resource_size(RESOURCE_ID_PREZR_LAMP_OFF_PACK)
     };
 
     // Allocate the memory for the animations
@@ -133,6 +131,26 @@ void load_zombie_die_pack(void) {
 }
 
 //
+// Weapon pack
+//
+uint32_t get_weapon_fire_anim_resource(size_t index) {
+    switch (index) {
+    case 0: return RESOURCE_ID_PREZR_SG_FIRE1_PACK;
+    case 1: return RESOURCE_ID_PREZR_SG_FIRE2_PACK;
+    case 2: return RESOURCE_ID_PREZR_SG_FIRE3_PACK;
+    default: return 0;
+    }
+}
+
+void load_weapon_static_pack(void) {
+    load_pack_placement(&weapon_pack, &weapon_mem, RESOURCE_ID_PREZR_SG_STATIC_PACK);
+}
+void load_weapon_fire_pack(uint32_t index) {
+    uint32_t res = get_weapon_fire_anim_resource(index);
+    load_pack_placement(&weapon_pack, &weapon_mem, res);
+}
+
+//
 // Face pack
 //
 static const uint32_t face_type_map[] = {
@@ -162,3 +180,4 @@ const GBitmap* get_lamp_resource(void) { return lamp_pack.resources[0].bitmap; }
 const GBitmap* get_face_resource(uint32_t id) { return face_pack.resources[id].bitmap; }
 const GBitmap* get_numeral_resource(uint32_t id) { return numeric_pack.resources[id].bitmap; }
 
+const GBitmap* get_random_face_resource(void) { return face_pack.resources[rand() % face_pack.numResources].bitmap; }
