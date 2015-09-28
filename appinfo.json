@@ -15,32 +15,32 @@
                 "type": "png"
             },
             {
-                "file": "data/prezr.weaponfire3.blob",
+                "file": "data/prezr.sg_fire3.blob",
                 "name": "PREZR_WEAPONFIRE3_PACK",
                 "type": "raw"
             },
             {
-                "file": "data/prezr.weaponfire2.blob",
+                "file": "data/prezr.sg_fire2.blob",
                 "name": "PREZR_WEAPONFIRE2_PACK",
                 "type": "raw"
             },
             {
-                "file": "data/prezr.weaponfire1.blob",
+                "file": "data/prezr.sg_fire1.blob",
                 "name": "PREZR_WEAPONFIRE1_PACK",
                 "type": "raw"
             },
             {
-                "file": "data/prezr.playerwalk.blob",
+                "file": "data/prezr.zombiewalk.blob",
                 "name": "PREZR_PLAYERWALK_PACK",
                 "type": "raw"
             },
             {
-                "file": "data/prezr.playerdie.blob",
+                "file": "data/prezr.zombiedie.blob",
                 "name": "PREZR_PLAYERDIE_PACK",
                 "type": "raw"
             },
             {
-                "file": "data/prezr.weaponstatic.blob",
+                "file": "data/prezr.sg_static.blob",
                 "name": "PREZR_WEAPONSTATIC_PACK",
                 "type": "raw"
             },

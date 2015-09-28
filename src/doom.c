@@ -2,13 +2,13 @@
 #include "doom.h"
 #include "prezr.h"
   
-#define PREZR_IMPORT_PLAYERWALK_PACK
-#define PREZR_IMPORT_PLAYERDIE_PACK
+#define PREZR_IMPORT_ZOMBIEWALK_PACK
+#define PREZR_IMPORT_ZOMBIEDIE_PACK
 #define PREZR_IMPORT_NUMERALS_PACK
-#define PREZR_IMPORT_WEAPONSTATIC_PACK
-#define PREZR_IMPORT_WEAPONFIRE1_PACK
-#define PREZR_IMPORT_WEAPONFIRE2_PACK
-#define PREZR_IMPORT_WEAPONFIRE3_PACK
+#define PREZR_IMPORT_SG_STATIC_PACK
+#define PREZR_IMPORT_SG_FIRE1_PACK
+#define PREZR_IMPORT_SG_FIRE2_PACK
+#define PREZR_IMPORT_SG_FIRE3_PACK
 #define PREZR_IMPORT_RESPAWN_PACK
 #define PREZR_IMPORT_LAMP_ON_PACK
 #define PREZR_IMPORT_LAMP_OFF_PACK
@@ -182,15 +182,11 @@ static void handle_window_unload(Window* window) {
   
   // delete images
   prezr_unload_background();
-  prezr_unload_playerwalk();
+  prezr_unload_zombiewalk();
   prezr_unload_lamp_on();
-  prezr_unload_weaponstatic();
+  prezr_unload_sg_static();
   prezr_unload_numerals();
   prezr_unload_face0();
-  
-  // delete animations
-  //animSpriteDef_destroy(&animDef_doom_guy_walk);
-  //animSpriteDef_destroy(&animDef_doom_guy_firing);
 }
 
 void doom_init(struct tm* init_time, uint8_t batteryPercent, bool isCharging, bool hasBluetooth) {
@@ -204,11 +200,11 @@ void doom_init(struct tm* init_time, uint8_t batteryPercent, bool isCharging, bo
   prezr_load_face0();
   bitmap_layer_set_bitmap(face, prezr_face0.resources[0].bitmap);
     
-  prezr_load_weaponstatic();
-  set_image_and_center_bottom(weapon, &prezr_weaponstatic.resources[PREZR_WEAPONSTATIC_SHTGA0], weaponPos);
+  prezr_load_sg_static();
+  set_image_and_center_bottom(weapon, &prezr_sg_static.resources[PREZR_SG_STATIC_SHTGA0], weaponPos);
   
-  prezr_load_playerwalk();
-  set_image_and_center_bottom(player, &prezr_playerwalk.resources[0], enemyPos);
+  prezr_load_zombiewalk();
+  set_image_and_center_bottom(player, &prezr_zombiewalk.resources[0], enemyPos);
   
   // Fire event handlers and set initial state
   doom_time_changed(init_time);
@@ -249,7 +245,7 @@ void doom_animate(void) {
   
   if (walking) {
     walk_frame ^= 1;
-    set_image_and_center_bottom(player, &prezr_playerwalk.resources[walk_frame], enemyPos);
+    set_image_and_center_bottom(player, &prezr_zombiewalk.resources[walk_frame], enemyPos);
   }
 }
 
@@ -276,9 +272,9 @@ void respawn_frame(size_t frameNum) {
 }
 
 void respawn(void) {
-  prezr_unload_playerdie();
-  prezr_load_playerwalk();
-  set_image_and_center_bottom(player, &prezr_playerwalk.resources[walk_frame], enemyPos);
+  prezr_unload_zombiedie();
+  prezr_load_zombiewalk();
+  set_image_and_center_bottom(player, &prezr_zombiewalk.resources[walk_frame], enemyPos);
   walking = true;
   
   prezr_load_respawn();  
@@ -294,7 +290,7 @@ void respawn(void) {
 }
     
 void die_frame(size_t frameNum) {
-  if (frameNum == PREZR_PLAYERDIE_COUNT - 1) {
+  if (frameNum == PREZR_ZOMBIEDIE_COUNT - 1) {
     // end of animation - start respawn
     app_timer_register(
       respawn_pause, 
@@ -303,7 +299,7 @@ void die_frame(size_t frameNum) {
   } else {
     // continue the animation
     frameNum++;
-    set_image_and_center_bottom(player, &prezr_playerdie.resources[frameNum], enemyPos);
+    set_image_and_center_bottom(player, &prezr_zombiedie.resources[frameNum], enemyPos);
     
     app_timer_register(
       die_frame_delay, 
@@ -315,19 +311,19 @@ void die_frame(size_t frameNum) {
 void fire_frame2(size_t frameNum) {
   switch (frameNum) {
     case 0:
-      prezr_unload_weaponfire1();
-      prezr_load_weaponfire2();
-      set_image_and_center_bottom(weapon, &prezr_weaponfire2.resources[0], weaponPos);
+      prezr_unload_sg_fire1();
+      prezr_load_sg_fire2();
+      set_image_and_center_bottom(weapon, &prezr_sg_fire2.resources[0], weaponPos);
       break;
     case 1:
-      prezr_unload_weaponfire2();
-      prezr_load_weaponfire3();
-      set_image_and_center_bottom(weapon, &prezr_weaponfire3.resources[0], weaponPos);
+      prezr_unload_sg_fire2();
+      prezr_load_sg_fire3();
+      set_image_and_center_bottom(weapon, &prezr_sg_fire3.resources[0], weaponPos);
       break;
     case 2:      
-      prezr_unload_weaponfire2();
-      prezr_load_weaponstatic();
-      set_image_and_center_bottom(weapon, &prezr_weaponstatic.resources[PREZR_WEAPONSTATIC_SHTGA0], weaponPos);
+      prezr_unload_sg_fire2();
+      prezr_load_sg_static();
+      set_image_and_center_bottom(weapon, &prezr_sg_static.resources[PREZR_SG_STATIC_SHTGA0], weaponPos);
       return; // end of animation
   }
     
@@ -342,9 +338,9 @@ void fire_frame(void* unused) {
   bitmap_layer_set_bitmap(muzzleflash, NULL);
   layer_set_hidden(bitmap_layer_get_layer(muzzleflash), true);
   
-  prezr_unload_weaponstatic();
-  prezr_load_weaponfire1();  
-  set_image_and_center_bottom(weapon, &prezr_weaponfire1.resources[0], weaponPos);
+  prezr_unload_sg_static();
+  prezr_load_sg_fire1();  
+  set_image_and_center_bottom(weapon, &prezr_sg_fire1.resources[0], weaponPos);
   
   app_timer_register(
       fire_frame_delay, 
@@ -368,14 +364,14 @@ void doom_time_changed(struct tm *t) {
   
   if (walking) {
     // evict the walk animation and load the die animation
-    prezr_unload_playerwalk();
-    prezr_load_playerdie();
-    set_image_and_center_bottom(player, &prezr_playerdie.resources[0], enemyPos);
+    prezr_unload_zombiewalk();
+    prezr_load_zombiedie();
+    set_image_and_center_bottom(player, &prezr_zombiedie.resources[0], enemyPos);
     walking = false;
     
     // show muzzleflash
     layer_set_hidden(bitmap_layer_get_layer(muzzleflash), false);
-    bitmap_layer_set_bitmap(muzzleflash, prezr_weaponstatic.resources[PREZR_WEAPONSTATIC_SHTFA0].bitmap);
+    bitmap_layer_set_bitmap(muzzleflash, prezr_sg_static.resources[PREZR_SG_STATIC_SHTFA0].bitmap);
     
     // start firing timer
     app_timer_register(
