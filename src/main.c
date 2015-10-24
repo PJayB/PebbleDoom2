@@ -1,6 +1,18 @@
 #include <pebble.h>
 #include "doom.h"
   
+void tap_handler(AccelAxisType axis, int32_t direction) {
+  switch (axis) {
+  case ACCEL_AXIS_Z:
+    if (direction < 0) {
+      doom_play_kill_animation();
+    }
+    break;
+  default:
+    break;
+  }
+}
+
 void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   if ((units_changed & MINUTE_UNIT) != 0) {
     doom_time_changed(tick_time);
@@ -32,6 +44,8 @@ int main(void) {
   tick_timer_service_subscribe(SECOND_UNIT, tick_handler);
   battery_state_service_subscribe(battery_handler);
   bluetooth_connection_service_subscribe(bluetooth_handler);
+  accel_tap_service_subscribe(tap_handler);
+    
   app_event_loop();
   doom_destroy();
 }
