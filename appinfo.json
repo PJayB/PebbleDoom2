@@ -9,8 +9,33 @@
     "resources": {
         "media": [
             {
-                "file": "data/prezr.zombiedie.blob",
-                "name": "PREZR_ZOMBIEDIE_PACK",
+                "file": "data/prezr.lamp_on.blob",
+                "name": "PREZR_LAMP_ON_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.numerals.blob",
+                "name": "PREZR_NUMERALS_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.face1.blob",
+                "name": "PREZR_FACE1_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.respawn.blob",
+                "name": "PREZR_RESPAWN_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.face2.blob",
+                "name": "PREZR_FACE2_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.sg_fire2.blob",
+                "name": "PREZR_SG_FIRE2_PACK",
                 "type": "raw"
             },
             {
@@ -24,23 +49,8 @@
                 "type": "raw"
             },
             {
-                "file": "data/prezr.face0.blob",
-                "name": "PREZR_FACE0_PACK",
-                "type": "raw"
-            },
-            {
                 "file": "data/prezr.lamp_off.blob",
                 "name": "PREZR_LAMP_OFF_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.facebattery.blob",
-                "name": "PREZR_FACEBATTERY_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.zombiewalk.blob",
-                "name": "PREZR_ZOMBIEWALK_PACK",
                 "type": "raw"
             },
             {
@@ -54,8 +64,8 @@
                 "type": "raw"
             },
             {
-                "file": "data/prezr.face2.blob",
-                "name": "PREZR_FACE2_PACK",
+                "file": "data/prezr.facebattery.blob",
+                "name": "PREZR_FACEBATTERY_PACK",
                 "type": "raw"
             },
             {
@@ -65,28 +75,13 @@
                 "type": "png"
             },
             {
-                "file": "data/prezr.lamp_on.blob",
-                "name": "PREZR_LAMP_ON_PACK",
+                "file": "data/prezr.zombiewalk.blob",
+                "name": "PREZR_ZOMBIEWALK_PACK",
                 "type": "raw"
             },
             {
-                "file": "data/prezr.sg_fire1.blob",
-                "name": "PREZR_SG_FIRE1_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.sg_fire2.blob",
-                "name": "PREZR_SG_FIRE2_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.numerals.blob",
-                "name": "PREZR_NUMERALS_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.respawn.blob",
-                "name": "PREZR_RESPAWN_PACK",
+                "file": "data/prezr.zombiedie.blob",
+                "name": "PREZR_ZOMBIEDIE_PACK",
                 "type": "raw"
             },
             {
@@ -95,8 +90,13 @@
                 "type": "raw"
             },
             {
-                "file": "data/prezr.face1.blob",
-                "name": "PREZR_FACE1_PACK",
+                "file": "data/prezr.sg_fire1.blob",
+                "name": "PREZR_SG_FIRE1_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.face0.blob",
+                "name": "PREZR_FACE0_PACK",
                 "type": "raw"
             }
         ]
