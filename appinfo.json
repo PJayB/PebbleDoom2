@@ -9,66 +9,6 @@
     "resources": {
         "media": [
             {
-                "file": "data/prezr.lamp_on.blob",
-                "name": "PREZR_LAMP_ON_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.numerals.blob",
-                "name": "PREZR_NUMERALS_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.face1.blob",
-                "name": "PREZR_FACE1_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.respawn.blob",
-                "name": "PREZR_RESPAWN_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.face2.blob",
-                "name": "PREZR_FACE2_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.sg_fire2.blob",
-                "name": "PREZR_SG_FIRE2_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.sg_static.blob",
-                "name": "PREZR_SG_STATIC_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.face4.blob",
-                "name": "PREZR_FACE4_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.lamp_off.blob",
-                "name": "PREZR_LAMP_OFF_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.face3.blob",
-                "name": "PREZR_FACE3_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.background.blob",
-                "name": "PREZR_BACKGROUND_PACK",
-                "type": "raw"
-            },
-            {
-                "file": "data/prezr.facebattery.blob",
-                "name": "PREZR_FACEBATTERY_PACK",
-                "type": "raw"
-            },
-            {
                 "file": "images/STFKILL1.png",
                 "menuIcon": true,
                 "name": "LOGO",
@@ -85,8 +25,18 @@
                 "type": "raw"
             },
             {
+                "file": "data/prezr.sg_static.blob",
+                "name": "PREZR_SG_STATIC_PACK",
+                "type": "raw"
+            },
+            {
                 "file": "data/prezr.sg_fire3.blob",
                 "name": "PREZR_SG_FIRE3_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.sg_fire2.blob",
+                "name": "PREZR_SG_FIRE2_PACK",
                 "type": "raw"
             },
             {
@@ -95,8 +45,58 @@
                 "type": "raw"
             },
             {
+                "file": "data/prezr.respawn.blob",
+                "name": "PREZR_RESPAWN_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.numerals.blob",
+                "name": "PREZR_NUMERALS_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.lamp_on.blob",
+                "name": "PREZR_LAMP_ON_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.lamp_off.blob",
+                "name": "PREZR_LAMP_OFF_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.facebattery.blob",
+                "name": "PREZR_FACEBATTERY_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.face4.blob",
+                "name": "PREZR_FACE4_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.face3.blob",
+                "name": "PREZR_FACE3_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.face2.blob",
+                "name": "PREZR_FACE2_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.face1.blob",
+                "name": "PREZR_FACE1_PACK",
+                "type": "raw"
+            },
+            {
                 "file": "data/prezr.face0.blob",
                 "name": "PREZR_FACE0_PACK",
+                "type": "raw"
+            },
+            {
+                "file": "data/prezr.background.blob",
+                "name": "PREZR_BACKGROUND_PACK",
                 "type": "raw"
             }
         ]
@@ -107,7 +107,7 @@
         "basalt"
     ],
     "uuid": "5d977290-f06f-4ae8-b864-1ed54601d833",
-    "versionLabel": "3.0",
+    "versionLabel": "3.5",
     "watchapp": {
         "watchface": true
     }

@@ -104,7 +104,8 @@ void set_bluetooth_status(bool hasBluetooth) {
 // Animation internal
 //
 
-static const int fire_frame_delay = 200;
+static const int fire_frame_delay = 150;
+static const int first_fire_frame_delay = 300;
 static const int die_frame_delay = 200;
 static const int respawn_frame_delay = 200;
 static const int respawn_pause = 3000;
@@ -213,7 +214,7 @@ void doom_play_kill_animation(void) {
 
         // start firing timer
         app_timer_register(
-            fire_frame_delay,
+            first_fire_frame_delay,
             (AppTimerCallback) fire_frame,
             NULL);
 

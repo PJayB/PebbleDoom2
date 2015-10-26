@@ -138,6 +138,7 @@ uint32_t get_weapon_fire_anim_resource(size_t index) {
     case 0: return RESOURCE_ID_PREZR_SG_FIRE1_PACK;
     case 1: return RESOURCE_ID_PREZR_SG_FIRE2_PACK;
     case 2: return RESOURCE_ID_PREZR_SG_FIRE3_PACK;
+    case 3: return RESOURCE_ID_PREZR_SG_FIRE2_PACK;
     default: return 0;
     }
 }

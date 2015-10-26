@@ -10,6 +10,7 @@
 // Layout constants
 static const GPoint zombiePos = {48 + 25, 18 + 56};
 static const GPoint weaponPos = {69, 136};
+static const GPoint muzzleFlashPos = {69, 136 - 42};
 static const GPoint respawnPos = {48 + 25, 18 + 28};
 
 
@@ -85,7 +86,7 @@ void start_weapon_static_anim(void) {
 
 void show_muzzle_flash_anim(void) {
     ASSERT(in_weapon_static);
-    set_image_and_center_bottom(layer_muzzleflash, &weapon_pack.resources[PREZR_SG_STATIC_SHTFA0], weaponPos);
+    set_image_and_center_bottom(layer_muzzleflash, &weapon_pack.resources[PREZR_SG_STATIC_SHTFA0], muzzleFlashPos);
     layer_set_hidden(bitmap_layer_get_layer(layer_muzzleflash), false);
 }
 
@@ -100,7 +101,7 @@ void end_weapon_static_anim(void) {
 }
 
 bool at_end_of_weapon_fire_anim(size_t index) {
-    return get_weapon_fire_anim_resource(index+1) != 0;
+    return get_weapon_fire_anim_resource(index+1) == 0;
 }
 
 void start_weapon_fire_anim(void) {
